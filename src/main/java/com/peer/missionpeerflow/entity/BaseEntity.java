@@ -1,11 +1,21 @@
 package com.peer.missionpeerflow.entity;
 
+import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 import java.time.LocalDateTime;
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 
+@Data
 @MappedSuperclass
+@EnableJpaAuditing
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 	@Column(nullable = false, columnDefinition = "VARCHAR(10)")
 	private String nickname;
@@ -17,8 +27,10 @@ public abstract class BaseEntity {
 	@Lob
 	private String content;
 
+	@CreatedDate
 	@Column(nullable = false)
-	private LocalDateTime created;
+	private LocalDateTime createdAt;
 
-	private LocalDateTime updated;
+	@LastModifiedDate
+	private LocalDateTime updatedAt;
 }
