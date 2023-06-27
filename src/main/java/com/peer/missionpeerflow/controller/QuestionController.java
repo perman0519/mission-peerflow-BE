@@ -1,17 +1,15 @@
 package com.peer.missionpeerflow.controller;
 
-import com.peer.missionpeerflow.dto.request.DeleteQuestionRequest;
+import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.service.QuestionService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class QuestionController {
 	}
 
 	@PostMapping("/{questionId}")
-	public void deleteQuestion(@PathVariable(name = "questionId") Long questionId, @RequestBody @Valid DeleteQuestionRequest request) {
+	public void deleteQuestion(@PathVariable(name = "questionId") Long questionId, @RequestBody @Valid DeleteRequest request) {
 		questionService.deleteQuestion(questionId, request);
 	}
 

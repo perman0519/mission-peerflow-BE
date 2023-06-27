@@ -1,10 +1,9 @@
 package com.peer.missionpeerflow.service;
 
-import com.peer.missionpeerflow.dto.request.DeleteQuestionRequest;
+import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.repository.QuestionRepository;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +34,7 @@ public class QuestionService {
 	}
 
 	@Transactional
-	public void deleteQuestion(Long questionId, DeleteQuestionRequest request) {
+	public void deleteQuestion(Long questionId, DeleteRequest request) {
 		Question question = questionRepository.findByQuestionId(questionId).orElseThrow(() -> new RuntimeException("none"));
 		if (question.getPassword().equals(request.getPassword())) {
 			questionRepository.delete(question);

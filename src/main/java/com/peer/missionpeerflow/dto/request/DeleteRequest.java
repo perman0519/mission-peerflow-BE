@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
-public class DeleteQuestionRequest {
+public class DeleteRequest {
 
 	private String type;
 

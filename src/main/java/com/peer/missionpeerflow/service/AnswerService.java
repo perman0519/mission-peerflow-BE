@@ -1,5 +1,6 @@
 package com.peer.missionpeerflow.service;
 
+import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.request.PostAnswerRequest;
 import com.peer.missionpeerflow.dto.request.UpdateAnswerRequest;
 import com.peer.missionpeerflow.entity.Answer;
@@ -28,6 +29,17 @@ public class AnswerService {
 		Answer answer = answerRespoitory.findByAnswerId(answerId).orElseThrow(() -> new RuntimeException("none"));
 		if (answer.getNickname().equals(request.getNickname()) && answer.getPassword().equals(request.getPassword())) {
 			answer.update(request);
+		} else {
+			throw new RuntimeException(); // TODO: custom Exception로 고치기
+			// 유효하지 않은 비밀번호 에러 던지기
+		}
+	}
+
+	@Transactional
+	public void deleteAnswer(Long answerId, DeleteRequest request) {
+		Answer answer = answerRespoitory.findByAnswerId(answerId).orElseThrow(() -> new RuntimeException("none"));
+		if (answer.getPassword().equals(request.getPassword())) {
+			answerRespoitory.delete(answer);
 		} else {
 			throw new RuntimeException(); // TODO: custom Exception로 고치기
 			// 유효하지 않은 비밀번호 에러 던지기

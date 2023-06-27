@@ -1,5 +1,6 @@
 package com.peer.missionpeerflow.controller;
 
+import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.request.PostAnswerRequest;
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.dto.request.UpdateAnswerRequest;
@@ -27,5 +28,10 @@ public class AnswerController {
 	@PutMapping("/{answerId}")
 	public void updateAnswer(@PathVariable(name = "answerId") Long answerId, @RequestBody @Valid UpdateAnswerRequest request) {
 		answerService.updateAnswer(answerId, request);
+	}
+
+	@PostMapping("/{answerId}")
+	public void deleteAnswer(@PathVariable(name = "answerId") Long answerId, @RequestBody @Valid DeleteRequest request) {
+		answerService.deleteAnswer(answerId, request);
 	}
 }
