@@ -62,4 +62,8 @@ public class Question extends BaseEntity {
 		this.content = request.getContent();
 		this.updatedAt = LocalDateTime.now();
 	}
+
+	public void addAnswer(Answer answer) {
+		this.answerList.add(answer);
+	}
 }

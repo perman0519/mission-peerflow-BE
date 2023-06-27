@@ -1,6 +1,8 @@
 package com.peer.missionpeerflow.entity;
 
+import com.peer.missionpeerflow.dto.request.PostAnswerRequest;
 import com.sun.istack.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -38,4 +40,14 @@ public class Answer extends BaseEntity {
 
 	@OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<AnswerComment> answerCommentList = new ArrayList<>();
+
+	public Answer(PostAnswerRequest request, Question question) {
+		this.question = question;
+		this.nickname = request.getNickname();
+		this.password = request.getPassword();
+		this.content = request.getContent();
+		this.createdAt = LocalDateTime.now();
+		this.isAdopted = false;
+	}
+
 }
