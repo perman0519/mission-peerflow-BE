@@ -10,25 +10,23 @@ import lombok.Getter;
 @Getter
 public class QuestionRequest {
 
-	@NotBlank()
 	private String type;
 
-	@NotBlank()
+	@NotBlank(message = "제목을 입력해주세요.")
 	private String title;
 
-	@NotBlank()
+	@NotBlank(message = "닉네임을 입력해주세요.")
 	private String nickname;
 
-	@NotBlank()
+	@NotBlank(message = "비밀번호를 입력해주세요.")
 	private String password;
 
-	@NotNull()
+	@NotNull(message = "카테고리를 입력해주세요.")
 	private String category;
 
-	@NotNull
+	@NotNull(message = "내용을 입력해주세요.")
 	private String content;
 
-	@PastOrPresent()
 	private LocalDate created;
 
 	public Category getCategory() {

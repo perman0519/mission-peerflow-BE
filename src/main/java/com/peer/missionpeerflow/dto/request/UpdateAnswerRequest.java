@@ -13,18 +13,17 @@ public class UpdateAnswerRequest {
 	private String type;
 
 	@JsonProperty("question_id")
-	@NotNull
+	@NotNull(message = "question id를 입력해주세요.")
 	private Long questionId;
 
-	@NotBlank
+	@NotBlank(message = "닉네임을 입력해주세요.")
 	private String nickname;
 
-	@NotBlank
+	@NotBlank(message = "비밀번호를 입력해주세요.")
 	private String password;
 
-	@NotNull
+	@NotNull(message = "내용을 입력해주세요.")
 	private String content;
 
-	@PastOrPresent
 	private LocalDateTime updated;
 }

@@ -1,5 +1,6 @@
 package com.peer.missionpeerflow.util;
 
+import com.peer.missionpeerflow.exception.NotFoundException;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -18,14 +19,14 @@ public enum Category {
 		return Arrays.stream(Category.values())
 						.filter(e -> e.getCode() == code)
 						.findAny()
-						.orElseThrow(() -> new NoSuchElementException("존재하지 않는 카테고리입니다."));
+						.orElseThrow(() -> new NotFoundException("존재하지 않는 카테고리입니다."));
 	}
 
 	public static Category ofType(String type) {
 		return Arrays.stream(Category.values())
 						.filter(e -> e.getType().equals(type))
 						.findAny()
-						.orElseThrow(() -> new NoSuchElementException("존재하지 않는 카테고리입니다."));
+						.orElseThrow(() -> new NotFoundException("존재하지 않는 카테고리입니다."));
 	}
 
 	public int getCode() {
