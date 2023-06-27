@@ -1,5 +1,6 @@
 package com.peer.missionpeerflow.service;
 
+import com.peer.missionpeerflow.dto.request.DeleteQuestionRequest;
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.repository.QuestionRepository;
@@ -27,6 +28,17 @@ public class QuestionService {
 
 		if ((question.getNickname().equals(request.getNickname())) && question.getPassword().equals(request.getPassword())) {
 			question.update(request);
+		} else {
+			throw new RuntimeException(); // TODO: custom Exception로 고치기
+			// 유효하지 않은 비밀번호 에러 던지기
+		}
+	}
+
+	@Transactional
+	public void deleteQuestion(Long questionId, DeleteQuestionRequest request) {
+		Question question = questionRepository.findByQuestionId(questionId).orElseThrow(() -> new RuntimeException("none"));
+		if (question.getPassword().equals(request.getPassword())) {
+			questionRepository.delete(question);
 		} else {
 			throw new RuntimeException(); // TODO: custom Exception로 고치기
 			// 유효하지 않은 비밀번호 에러 던지기
