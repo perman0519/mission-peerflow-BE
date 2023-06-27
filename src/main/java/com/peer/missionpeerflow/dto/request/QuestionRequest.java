@@ -8,7 +8,7 @@ import javax.validation.constraints.PastOrPresent;
 import lombok.Getter;
 
 @Getter
-public class PostQuestionRequest {
+public class QuestionRequest {
 
 	@NotBlank()
 	private String type;
