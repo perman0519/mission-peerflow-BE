@@ -13,7 +13,7 @@ public class UpdateAnswerRequest {
 	private String type;
 
 	@JsonProperty("question_id")
-	@NotBlank
+	@NotNull
 	private Long questionId;
 
 	@NotBlank

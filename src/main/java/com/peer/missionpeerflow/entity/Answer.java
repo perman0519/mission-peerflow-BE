@@ -1,6 +1,7 @@
 package com.peer.missionpeerflow.entity;
 
 import com.peer.missionpeerflow.dto.request.PostAnswerRequest;
+import com.peer.missionpeerflow.dto.request.UpdateAnswerRequest;
 import com.sun.istack.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -50,4 +51,8 @@ public class Answer extends BaseEntity {
 		this.isAdopted = false;
 	}
 
+	public void update(UpdateAnswerRequest request) {
+		this.content = request.getContent();
+		this.updatedAt = LocalDateTime.now();
+	}
 }
