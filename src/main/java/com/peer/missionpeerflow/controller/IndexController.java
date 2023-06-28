@@ -20,7 +20,6 @@ public class IndexController {
 
     private final IndexService indexService;
 
-
     private final QuestionRepository questionRepository;
     @GetMapping("/test1")
     public void test()
@@ -70,25 +69,32 @@ public class IndexController {
     @GetMapping("")
     public ResponseEntity<Page<IndexDTO>> getIndex(
             @RequestParam(value = "pagingIndex", defaultValue = "0") int pagingIndex,
-            @RequestParam(value = "pagingSize", defaultValue = "10") int pagingSize) {
-        Page<IndexDTO> indexDTOS = indexService.getIndex(pagingIndex, pagingSize);
+            @RequestParam(value = "pagingSize", defaultValue = "10") int pagingSize,
+            @RequestParam(required = false) String category) {
+        Page<IndexDTO> indexDTOS;
+        if (category == null) {
+            indexDTOS = indexService.getIndex(pagingIndex, pagingSize);
+        }
+        else {
+            Category cate = Category.ofType(category);
+            indexDTOS = indexService.getCategoryBoards(pagingIndex, pagingSize, cate);
+        }
+
         if (indexDTOS.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(indexDTOS, HttpStatus.OK);
     }
 
-    @GetMapping("/category")
-    public ResponseEntity<Page<IndexDTO>> getCategoryBoards(
+    @GetMapping("/search")
+    public ResponseEntity<Page<IndexDTO>> getIndex(
             @RequestParam(value = "pagingIndex", defaultValue = "0") int pagingIndex,
             @RequestParam(value = "pagingSize", defaultValue = "10") int pagingSize,
-            @RequestParam String category) {
-        Category cate = Category.ofType(category);
-        System.out.println("cate = " + cate);
-        Page<IndexDTO> indexDTOS = indexService.getCategoryBoards(pagingIndex, pagingSize, cate);
-        if (indexDTOS.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(indexDTOS, HttpStatus.OK);
+            @RequestParam("title") String title,
+            @RequestParam(value = "sort", defaultValue = "latest") String sort)
+    {
+        Page<IndexDTO> searchResult = indexService.search(pagingIndex, pagingSize, title, sort);
+        return new ResponseEntity<>(searchResult, HttpStatus.OK);
     }
+
 }

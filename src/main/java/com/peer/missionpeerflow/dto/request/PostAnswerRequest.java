@@ -2,10 +2,11 @@ package com.peer.missionpeerflow.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
+
+import lombok.Getter;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import lombok.Getter;
 
 @Getter
 public class PostAnswerRequest {
