@@ -18,19 +18,18 @@ import javax.persistence.MappedSuperclass;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 	@Column(nullable = false, columnDefinition = "VARCHAR(10)")
-	private String nickname;
+	protected String nickname;
 
 	@Column(nullable = false, columnDefinition = "VARCHAR(10)")
-	private String password;
+	protected String password;
 
 	@Column(nullable = false)
 	@Lob
-	private String content;
+	protected String content;
 
 	@CreatedDate
-	@Column(nullable = false)
-	private LocalDateTime createdAt;
+	protected LocalDateTime createdAt;
 
 	@LastModifiedDate
-	private LocalDateTime updatedAt;
+	protected LocalDateTime updatedAt;
 }
