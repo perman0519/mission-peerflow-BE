@@ -26,4 +26,9 @@ public class QuestionCommentController {
     public void updateQuestionComment(@PathVariable(name = "commentId") Long commentId, @RequestBody @Valid QuestionCommentRequest request) {
         questionCommentService.updateQuestionComment(commentId, request);
     }
+
+    @PostMapping("/{commentId}")
+    public void deleteQuestionComment(@PathVariable(name = "commentId") Long commentId, @RequestBody @Valid QuestionCommentRequest request) {
+        questionCommentService.deleteQuestionComment(commentId, request);
+    }
 }
