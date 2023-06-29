@@ -1,5 +1,7 @@
 package com.peer.missionpeerflow.entity;
 
+import com.peer.missionpeerflow.dto.request.QuestionCommentRequest;
+import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.sun.istack.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -24,4 +28,12 @@ public class QuestionComment extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "question_id")
 	private Question question;
+
+	public QuestionComment (Question question, QuestionCommentRequest request) {
+		this.question = question;
+		this.nickname = request.getNickname();
+		this.password = request.getPassword();
+		this.content = request.getContent();
+		this.createdAt = LocalDateTime.now();
+	}
 }
