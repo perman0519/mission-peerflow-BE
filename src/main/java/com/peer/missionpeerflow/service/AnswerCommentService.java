@@ -2,14 +2,20 @@ package com.peer.missionpeerflow.service;
 
 import com.peer.missionpeerflow.dto.request.AnswerCommentRequest;
 import com.peer.missionpeerflow.dto.request.QuestionCommentRequest;
+import com.peer.missionpeerflow.dto.response.AnswerCommentResponse;
+import com.peer.missionpeerflow.dto.response.QuestionCommentResponse;
 import com.peer.missionpeerflow.entity.Answer;
 import com.peer.missionpeerflow.entity.AnswerComment;
+import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.entity.QuestionComment;
 import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.exception.NotFoundException;
 import com.peer.missionpeerflow.repository.AnswerCommentRepository;
 import com.peer.missionpeerflow.repository.AnswerRespoitory;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +25,14 @@ public class AnswerCommentService {
 
     private final AnswerRespoitory answerRespoitory;
     private final AnswerCommentRepository answerCommentRepository;
+
+    private final ModelMapper modelMapper = new ModelMapper();
+
+    @Transactional
+    public Page<AnswerCommentResponse> getAnswerComment(long answerId, Pageable pageable) {
+        Page<AnswerComment> comments = answerCommentRepository.findByAnswerAnswerId(answerId, pageable);
+        return comments.map(a -> modelMapper.map(a, AnswerCommentResponse.class));
+    }
 
     @Transactional
     public void postAnswerComment(AnswerCommentRequest request) {

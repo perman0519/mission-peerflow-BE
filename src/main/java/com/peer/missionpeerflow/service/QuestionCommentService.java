@@ -31,8 +31,6 @@ public class QuestionCommentService {
 
     @Transactional
     public Page<QuestionCommentResponse> getQuestionComment(long questionId, Pageable pageable) {
-        Question question = questionRepository.findById(questionId).
-                orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
         Page<QuestionComment> comments = questionCommentRepository.findByQuestionQuestionId(questionId, pageable);
         return comments.map(q -> modelMapper.map(q, QuestionCommentResponse.class));
     }
