@@ -2,6 +2,7 @@ package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
+import com.peer.missionpeerflow.dto.response.QuestionResponse;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.service.QuestionService;
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ public class QuestionController {
 
 	@GetMapping("/{questionId}")
 	@ResponseBody
-	public Question getQuestion(@PathVariable(name = "questionId") Long questionId) {
+	public QuestionResponse getQuestion(@PathVariable(name = "questionId") Long questionId) {
 		return questionService.getQuestion(questionId);
 	}
 
