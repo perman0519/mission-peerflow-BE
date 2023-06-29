@@ -40,4 +40,17 @@ public class AnswerCommentService {
             // 유효하지 않은 비밀번호 에러 던지기
         }
     }
+
+    @Transactional
+    public void deleteAnswerComment(long commentId, AnswerCommentRequest request) {
+        AnswerComment comment = answerCommentRepository.findByAnswerCommentId(commentId).
+                orElseThrow(() -> new NotFoundException("해당 Id의 댓글이 존재하지 않습니다."));
+
+        if ((comment.getNickname().equals(request.getNickname())) && comment.getPassword().equals(request.getPassword())) {
+            answerCommentRepository.delete(comment);
+        } else {
+            throw new ForbiddenException("유효하지 않은 비밀번호입니다.");
+            // 유효하지 않은 비밀번호 에러 던지기
+        }
+    }
 }
