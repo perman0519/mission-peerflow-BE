@@ -30,7 +30,7 @@ public class AnswerCommentService {
 
     @Transactional
     public void updateAnswerComment(long commentId, AnswerCommentRequest request) {
-        AnswerComment comment = answerCommentRepository.findByAnswerCommentId(commentId).
+        AnswerComment comment = answerCommentRepository.findById(commentId).
                 orElseThrow(() -> new NotFoundException("해당 Id의 댓글이 존재하지 않습니다."));
 
         if ((comment.getNickname().equals(request.getNickname())) && comment.getPassword().equals(request.getPassword())) {
@@ -43,7 +43,7 @@ public class AnswerCommentService {
 
     @Transactional
     public void deleteAnswerComment(long commentId, AnswerCommentRequest request) {
-        AnswerComment comment = answerCommentRepository.findByAnswerCommentId(commentId).
+        AnswerComment comment = answerCommentRepository.findById(commentId).
                 orElseThrow(() -> new NotFoundException("해당 Id의 댓글이 존재하지 않습니다."));
 
         if ((comment.getNickname().equals(request.getNickname())) && comment.getPassword().equals(request.getPassword())) {

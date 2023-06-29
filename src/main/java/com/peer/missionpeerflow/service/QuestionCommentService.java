@@ -20,7 +20,7 @@ public class QuestionCommentService {
 
     @Transactional
     public void postQuestionComment(QuestionCommentRequest request) {
-        Question question = questionRepository.findByQuestionId(request.getQuestionId()).
+        Question question = questionRepository.findById(request.getQuestionId()).
                 orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
         QuestionComment comment = new QuestionComment(question, request);
         questionCommentRepository.save(comment);
@@ -28,7 +28,7 @@ public class QuestionCommentService {
 
     @Transactional
     public void updateQuestionComment(long commentId, QuestionCommentRequest request) {
-        QuestionComment comment = questionCommentRepository.findByQuestionCommentId(commentId).
+        QuestionComment comment = questionCommentRepository.findById(commentId).
                 orElseThrow(() -> new NotFoundException("해당 Id의 댓글이 존재하지 않습니다."));
 
         if ((comment.getNickname().equals(request.getNickname())) && comment.getPassword().equals(request.getPassword())) {
@@ -41,7 +41,7 @@ public class QuestionCommentService {
 
     @Transactional
     public void deleteQuestionComment(long commentId, QuestionCommentRequest request) {
-        QuestionComment comment = questionCommentRepository.findByQuestionCommentId(commentId).
+        QuestionComment comment = questionCommentRepository.findById(commentId).
                 orElseThrow(() -> new NotFoundException("해당 Id의 댓글이 존재하지 않습니다."));
 
         if ((comment.getNickname().equals(request.getNickname())) && comment.getPassword().equals(request.getPassword())) {

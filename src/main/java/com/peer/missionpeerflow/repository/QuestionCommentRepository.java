@@ -8,6 +8,4 @@ import javax.xml.stream.events.Comment;
 import java.util.Optional;
 
 public interface QuestionCommentRepository extends JpaRepository<QuestionComment, Long> {
-
-    Optional<QuestionComment> findByQuestionCommentId(Long commentId);
 }

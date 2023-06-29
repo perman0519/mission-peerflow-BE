@@ -18,7 +18,7 @@ public class QuestionService {
 
 	@Transactional
 	public Question getQuestion(long questionId) {
-		return questionRepository.findByQuestionId(questionId).
+		return questionRepository.findById(questionId).
 				orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
 	}
 
