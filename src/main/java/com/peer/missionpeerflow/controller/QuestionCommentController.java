@@ -1,13 +1,16 @@
 package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.request.QuestionCommentRequest;
-import com.peer.missionpeerflow.dto.request.QuestionRequest;
+import com.peer.missionpeerflow.dto.response.QuestionCommentResponse;
+import com.peer.missionpeerflow.entity.QuestionComment;
 import com.peer.missionpeerflow.service.QuestionCommentService;
-import com.peer.missionpeerflow.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -16,6 +19,11 @@ import javax.validation.Valid;
 public class QuestionCommentController {
 
     private final QuestionCommentService questionCommentService;
+
+    @GetMapping("")
+    public Page<QuestionCommentResponse> getQuestionComment(@RequestParam long questionId, Pageable pageable) {
+        return questionCommentService.getQuestionComment(questionId, pageable);
+    }
 
     @PostMapping("")
     public void postQuestionComment(@RequestBody @Valid QuestionCommentRequest request) {

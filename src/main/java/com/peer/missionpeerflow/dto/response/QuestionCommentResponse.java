@@ -7,5 +7,4 @@ import lombok.Setter;
 @Setter
 public class QuestionCommentResponse extends BaseResponse {
     private String type = "question";
-    private long questionId;
 }

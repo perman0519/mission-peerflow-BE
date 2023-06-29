@@ -1,6 +1,8 @@
 package com.peer.missionpeerflow.service;
 
 import com.peer.missionpeerflow.dto.request.QuestionCommentRequest;
+import com.peer.missionpeerflow.dto.response.QuestionCommentResponse;
+import com.peer.missionpeerflow.dto.response.QuestionResponse;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.entity.QuestionComment;
 import com.peer.missionpeerflow.exception.ForbiddenException;
@@ -8,8 +10,15 @@ import com.peer.missionpeerflow.exception.NotFoundException;
 import com.peer.missionpeerflow.repository.QuestionCommentRepository;
 import com.peer.missionpeerflow.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.Converter;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -17,6 +26,16 @@ public class QuestionCommentService {
 
     private final QuestionRepository questionRepository;
     private final QuestionCommentRepository questionCommentRepository;
+
+    private final ModelMapper modelMapper = new ModelMapper();
+
+    @Transactional
+    public Page<QuestionCommentResponse> getQuestionComment(long questionId, Pageable pageable) {
+        Question question = questionRepository.findById(questionId).
+                orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
+        Page<QuestionComment> comments = questionCommentRepository.findByQuestionQuestionId(questionId, pageable);
+        return comments.map(q -> modelMapper.map(q, QuestionCommentResponse.class));
+    }
 
     @Transactional
     public void postQuestionComment(QuestionCommentRequest request) {
