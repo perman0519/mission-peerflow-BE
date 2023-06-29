@@ -8,11 +8,11 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
-public class QuestionCommentRequest {
+public class AnswerCommentRequest {
 
-    @JsonProperty("question_id")
-    @NotNull(message = "질문 글의 id가 필요합니다.")
-    private long questionId;
+    @JsonProperty("answer_id")
+    @NotNull(message = "답변 글의 id가 필요합니다.")
+    private long answerId;
 
     private String type;
 
