@@ -17,6 +17,12 @@ public class QuestionService {
 	private final QuestionRepository questionRepository;
 
 	@Transactional
+	public Question getQuestion(long questionId) {
+		return questionRepository.findByQuestionId(questionId).
+				orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
+	}
+
+	@Transactional
 	public void postQuestion(QuestionRequest request) {
 		Question question = new Question(request);
 		questionRepository.save(question);
