@@ -19,8 +19,8 @@ public class QuestionCommentService {
     private final QuestionCommentRepository questionCommentRepository;
 
     @Transactional
-    public void postQuestionComment(long questionId, QuestionCommentRequest request) {
-        Question question = questionRepository.findByQuestionId(questionId).
+    public void postQuestionComment(QuestionCommentRequest request) {
+        Question question = questionRepository.findByQuestionId(request.getQuestionId()).
                 orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
         QuestionComment comment = new QuestionComment(question, request);
         questionCommentRepository.save(comment);

@@ -17,9 +17,9 @@ public class QuestionCommentController {
 
     private final QuestionCommentService questionCommentService;
 
-    @PostMapping("/{questionId}")
-    public void postQuestionComment(@PathVariable(name = "questionId") Long questionId, @RequestBody @Valid QuestionCommentRequest request) {
-        questionCommentService.postQuestionComment(questionId, request);
+    @PostMapping("")
+    public void postQuestionComment(@RequestBody @Valid QuestionCommentRequest request) {
+        questionCommentService.postQuestionComment(request);
     }
 
     @PutMapping("/{commentId}")

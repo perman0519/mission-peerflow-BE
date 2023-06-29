@@ -9,6 +9,9 @@ import java.time.LocalDate;
 @Data
 public class QuestionCommentRequest {
 
+    @NotNull(message = "질문 글의 id가 필요합니다.")
+    private long questionId;
+
     private String type;
 
     @NotBlank(message = "닉네임을 입력해주세요.")
