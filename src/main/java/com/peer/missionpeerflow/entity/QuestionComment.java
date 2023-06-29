@@ -36,4 +36,9 @@ public class QuestionComment extends BaseEntity {
 		this.content = request.getContent();
 		this.createdAt = LocalDateTime.now();
 	}
+
+	public void update(QuestionCommentRequest request) {
+		this.content = request.getContent();
+		this.updatedAt = LocalDateTime.now();
+	}
 }

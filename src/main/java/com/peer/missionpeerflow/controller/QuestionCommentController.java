@@ -15,11 +15,15 @@ import javax.validation.Valid;
 @RequestMapping("/v1/question/comment")
 public class QuestionCommentController {
 
-    private final QuestionService questionService;
     private final QuestionCommentService questionCommentService;
 
     @PostMapping("/{questionId}")
     public void postQuestionComment(@PathVariable(name = "questionId") Long questionId, @RequestBody @Valid QuestionCommentRequest request) {
         questionCommentService.postQuestionComment(questionId, request);
+    }
+
+    @PutMapping("/{commentId}")
+    public void updateQuestionComment(@PathVariable(name = "commentId") Long commentId, @RequestBody @Valid QuestionCommentRequest request) {
+        questionCommentService.updateQuestionComment(commentId, request);
     }
 }
