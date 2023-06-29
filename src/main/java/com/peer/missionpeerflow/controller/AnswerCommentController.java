@@ -1,12 +1,10 @@
 package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.request.AnswerCommentRequest;
+import com.peer.missionpeerflow.dto.request.QuestionCommentRequest;
 import com.peer.missionpeerflow.service.AnswerCommentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -20,5 +18,10 @@ public class AnswerCommentController {
     @PostMapping("")
     public void postAnswerComment(@RequestBody @Valid AnswerCommentRequest request) {
         answerCommentService.postAnswerComment(request);
+    }
+
+    @PutMapping("/{commentId}")
+    public void updateAnswerComment(@PathVariable(name = "commentId") Long commentId, @RequestBody @Valid AnswerCommentRequest request) {
+        answerCommentService.updateAnswerComment(commentId, request);
     }
 }
