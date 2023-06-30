@@ -28,6 +28,7 @@ public abstract class BaseEntity {
 	protected String content;
 
 	@CreatedDate
+	@Column(nullable = false)
 	protected LocalDateTime createdAt;
 
 	@LastModifiedDate
