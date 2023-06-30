@@ -2,19 +2,40 @@ package com.peer.missionpeerflow.service;
 
 import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
+import com.peer.missionpeerflow.dto.response.AnswerResponse;
+import com.peer.missionpeerflow.dto.response.QuestionResponse;
+import com.peer.missionpeerflow.entity.Answer;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.exception.NotFoundException;
 import com.peer.missionpeerflow.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.Converter;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.Provider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class QuestionService {
 
 	private final QuestionRepository questionRepository;
+	private final ModelMapper modelMapper = new ModelMapper();
+	private QuestionResponse of(Question question) {
+		return modelMapper.map(question, QuestionResponse.class);
+	}
+
+	@Transactional
+	public QuestionResponse getQuestion(long questionId) {
+		Question question = questionRepository.findById(questionId).
+				orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
+		return of(question);
+	}
 
 	@Transactional
 	public void postQuestion(QuestionRequest request) {
