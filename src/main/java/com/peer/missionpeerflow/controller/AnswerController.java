@@ -1,6 +1,8 @@
 package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.request.*;
+import com.peer.missionpeerflow.entity.Answer;
+import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.service.AnswerService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +32,11 @@ public class AnswerController {
 	@PatchMapping("/{answerId}")
 	public void adoptAnswer(@PathVariable(name = "answerId") Long answerId, @RequestBody @Valid AdoptRequest request) {
 		answerService.adoptAnswer(answerId, request);
+	}
+  
+	@PostMapping("/{answerId}/recommend")
+	public String recommendAnswer(@PathVariable Long answerId) {
+		answerService.recommendAnswer(answerId);
+		return "redirect:/v1/answer" + answerId; // 해당 글로 리다이렉트
 	}
 }
