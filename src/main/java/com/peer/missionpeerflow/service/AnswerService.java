@@ -1,8 +1,6 @@
 package com.peer.missionpeerflow.service;
 
-import com.peer.missionpeerflow.dto.request.DeleteRequest;
-import com.peer.missionpeerflow.dto.request.PostAnswerRequest;
-import com.peer.missionpeerflow.dto.request.UpdateAnswerRequest;
+import com.peer.missionpeerflow.dto.request.*;
 import com.peer.missionpeerflow.entity.Answer;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.exception.ForbiddenException;
@@ -41,6 +39,16 @@ public class AnswerService {
 		Answer answer = answerRespoitory.findByAnswerId(answerId).orElseThrow(() -> new NotFoundException("해당 Id의 답글이 존재하지 않습니다."));
 		if (answer.getPassword().equals(request.getPassword())) {
 			answerRespoitory.delete(answer);
+		} else {
+			throw new ForbiddenException("유효하지 않은 비밀번호입니다.");
+		}
+	}
+
+	@Transactional
+	public void adoptAnswer(Long answerId, AdoptRequest request) {
+		Answer answer = answerRespoitory.findByAnswerId(answerId).orElseThrow(() -> new NotFoundException("해당 Id의 답글이 존재하지 않습니다."));
+		if (answer.getQuestion().getPassword().equals(request.getPassword())) {
+			answer.setIsAdopted(true);
 		} else {
 			throw new ForbiddenException("유효하지 않은 비밀번호입니다.");
 		}
