@@ -12,7 +12,6 @@ public class UpdateAnswerRequest {
 
 	private String type;
 
-	@JsonProperty("question_id")
 	@NotNull(message = "question id를 입력해주세요.")
 	private Long questionId;
 
@@ -25,5 +24,5 @@ public class UpdateAnswerRequest {
 	@NotNull(message = "내용을 입력해주세요.")
 	private String content;
 
-	private LocalDateTime updated;
+	private LocalDateTime updatedAt;
 }

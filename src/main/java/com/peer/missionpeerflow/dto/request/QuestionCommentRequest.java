@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Data
 public class QuestionCommentRequest {
 
-    @JsonProperty("question_id")
     @NotNull(message = "질문 글의 id가 필요합니다.")
     private long questionId;
 
@@ -25,5 +24,5 @@ public class QuestionCommentRequest {
     @NotNull(message = "내용을 입력해주세요.")
     private String content;
 
-    private LocalDate created;
+    private LocalDate createdAt;
 }
