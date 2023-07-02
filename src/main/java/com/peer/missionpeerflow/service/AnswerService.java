@@ -52,8 +52,9 @@ public class AnswerService {
 		} else {
 			throw new ForbiddenException("유효하지 않은 비밀번호입니다.");
 		}
+	}
 
-	public void recommendAnswer(Long answerId) {
+	public void recommendAnswer(Long answerId){
 		Answer answer = answerRespoitory.findById(answerId).orElseThrow(() -> {
 			return new IllegalArgumentException("답변이 존재하지 않습니다");
 		});
