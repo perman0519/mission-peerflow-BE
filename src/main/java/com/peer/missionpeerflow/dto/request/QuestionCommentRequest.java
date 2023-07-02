@@ -24,5 +24,5 @@ public class QuestionCommentRequest {
     @NotNull(message = "내용을 입력해주세요.")
     private String content;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 }

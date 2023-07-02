@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class AnswerCommentRequest {
@@ -24,5 +25,5 @@ public class AnswerCommentRequest {
     @NotNull(message = "내용을 입력해주세요.")
     private String content;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 }

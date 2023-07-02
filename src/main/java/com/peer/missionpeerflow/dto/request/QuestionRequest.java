@@ -27,7 +27,7 @@ public class QuestionRequest {
 	@NotNull(message = "내용을 입력해주세요.")
 	private String content;
 
-	private LocalDate createdAt;
+	private LocalDateTime createdAt;
 
 	public Category getCategory() {
 		return Category.ofType(category);
