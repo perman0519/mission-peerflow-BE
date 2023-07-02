@@ -77,6 +77,10 @@ branch와 pull request를 적극 활용해보세요!
    - 더 좋은 방향으로 수정해도 좋습니다.
    - [API 명세](https://www.notion.so/peer-study/peerflow-api-5898f07da57546669a021e033fea47e9?pvs=4)
 
+5. 디렉토리 안에 .keep 파일은 뭔가요?
+   - 디렉토리 구조를 잡아놓기 위해 임의로 넣은 임시 파일입니다. 해당 디렉토리에 파일을 생성하셨다면 .keep파일을 지우셔도 괜찮습니다.
+6. 시간상의 이유로 springboot 초기 설정과 entity 세팅을 하여 제공드리고 있습니다. 시간이 되신다면 build.gradle에 어떤 설정이 들어갔는지, 어떤 dependency가 있는지, 그리고 entity는 어떤 설정이 들어갔는지 공부해보시는 것도 추천드립니다. 
+
 ---
 ## Bonus
 - 더 안전한 서버를 만들기 위해 Junit을 위한 test code를 작성해봅시다. 
