@@ -26,17 +26,4 @@ public class QuestionComment extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "question_id")
 	private Question question;
-
-	public QuestionComment (Question question, QuestionCommentRequest request) {
-		this.question = question;
-		this.nickname = request.getNickname();
-		this.password = request.getPassword();
-		this.content = request.getContent();
-		this.createdAt = LocalDateTime.now();
-	}
-
-	public void update(QuestionCommentRequest request) {
-		this.content = request.getContent();
-		this.updatedAt = LocalDateTime.now();
-	}
 }

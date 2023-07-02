@@ -27,16 +27,4 @@ public class AnswerComment extends BaseEntity {
 	@JoinColumn(name = "answer_id")
 	private Answer answer;
 
-	public AnswerComment (Answer answer, AnswerCommentRequest request) {
-		this.answer = answer;
-		this.nickname = request.getNickname();
-		this.password = request.getPassword();
-		this.content = request.getContent();
-		this.createdAt = LocalDateTime.now();
-	}
-
-	public void update(AnswerCommentRequest request) {
-		this.content = request.getContent();
-		this.updatedAt = LocalDateTime.now();
-	}
 }

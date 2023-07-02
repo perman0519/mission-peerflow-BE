@@ -24,6 +24,7 @@ import lombok.Setter;
 @Table(name = "answer")
 @Entity
 public class Answer extends BaseEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long answerId;
@@ -42,17 +43,4 @@ public class Answer extends BaseEntity {
 	@OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<AnswerComment> answerCommentList = new ArrayList<>();
 
-	public Answer(PostAnswerRequest request, Question question) {
-		this.question = question;
-		this.nickname = request.getNickname();
-		this.password = request.getPassword();
-		this.content = request.getContent();
-		this.createdAt = LocalDateTime.now();
-		this.isAdopted = false;
-	}
-
-	public void update(UpdateAnswerRequest request) {
-		this.content = request.getContent();
-		this.updatedAt = LocalDateTime.now();
-	}
 }

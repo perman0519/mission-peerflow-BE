@@ -49,23 +49,4 @@ public class Question extends BaseEntity {
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<QuestionComment> questionCommentList = new ArrayList<>();
 
-	public Question (QuestionRequest request) {
-		this.title = request.getTitle();
-		this.category = request.getCategory();
-		this.nickname = request.getNickname();
-		this.password = request.getPassword();
-		this.content = request.getContent();
-		this.createdAt = LocalDateTime.now();
-	}
-
-	public void update(QuestionRequest request) {
-		this.title = request.getTitle();
-		this.category = request.getCategory();
-		this.content = request.getContent();
-		this.updatedAt = LocalDateTime.now();
-	}
-
-	public void addAnswer(Answer answer) {
-		this.answerList.add(answer);
-	}
 }
