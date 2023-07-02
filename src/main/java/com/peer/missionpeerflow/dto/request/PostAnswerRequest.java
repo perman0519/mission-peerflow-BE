@@ -13,7 +13,6 @@ public class PostAnswerRequest {
 
 	private String type;
 
-	@JsonProperty("question_id")
 	@NotNull(message = "question id를 입력해주세요.")
 	private Long questionId;
 
@@ -26,5 +25,5 @@ public class PostAnswerRequest {
 	@NotNull(message = "내용을 입력해주세요.")
 	private String content;
 
-	private LocalDateTime created;
+	private LocalDateTime createdAt;
 }

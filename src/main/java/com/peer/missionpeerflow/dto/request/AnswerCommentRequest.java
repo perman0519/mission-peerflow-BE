@@ -6,11 +6,11 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class AnswerCommentRequest {
 
-    @JsonProperty("answer_id")
     @NotNull(message = "답변 글의 id가 필요합니다.")
     private long answerId;
 
@@ -25,5 +25,5 @@ public class AnswerCommentRequest {
     @NotNull(message = "내용을 입력해주세요.")
     private String content;
 
-    private LocalDate created;
+    private LocalDateTime createdAt;
 }
