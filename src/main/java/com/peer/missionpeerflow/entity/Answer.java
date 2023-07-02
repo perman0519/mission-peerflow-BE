@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -38,7 +39,7 @@ public class Answer extends BaseEntity {
 	@Column(nullable = false)
 	private Long recommend = 0L;
 
-	@Column(nullable = false)
+	@Column(columnDefinition = "boolean default false")
 	private Boolean isAdopted;
 
 	@OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
