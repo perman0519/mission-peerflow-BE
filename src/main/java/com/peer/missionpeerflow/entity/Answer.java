@@ -39,7 +39,7 @@ public class Answer extends BaseEntity {
 	@Column(nullable = false)
 	private Long recommend = 0L;
 
-	@Column(columnDefinition = "boolean default false")
+	@Column(nullable = false)
 	private Boolean isAdopted;
 
 	@OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)

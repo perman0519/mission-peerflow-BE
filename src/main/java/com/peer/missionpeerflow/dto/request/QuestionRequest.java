@@ -2,6 +2,7 @@ package com.peer.missionpeerflow.dto.request;
 
 import com.peer.missionpeerflow.util.Category;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;

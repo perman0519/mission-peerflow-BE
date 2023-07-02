@@ -29,7 +29,7 @@ public class AnswerController {
 		answerService.deleteAnswer(answerId, request);
 	}
 
-	@PatchMapping("/{answerId}")
+	@PatchMapping("/{answerId}/adopt")
 	public void adoptAnswer(@PathVariable(name = "answerId") Long answerId, @RequestBody @Valid AdoptRequest request) {
 		answerService.adoptAnswer(answerId, request);
 	}
