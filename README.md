@@ -5,6 +5,9 @@ This is simple website Backend mission for searching 42 subject.
 
 ---
 ## 🚀 기능 요구 사항
+이 레포지토리를 fork한 후 main에서 나만의 peerflow 서버를 만들어봅시다. 
+branch와 pull request를 적극 활용해보세요!
+> demo/prod 브랜치는 사용하지 않습니다. 
 
 ### 메인 화면
 - 메인 화면에는 모든 글에 대한 조회가 있어야 합니다.
@@ -64,11 +67,13 @@ This is simple website Backend mission for searching 42 subject.
 ---
 
 ## 참고 사항
-1. 협업을 위한 컨벤션을 지켜봅시다.
+1. 처음 Build를 위한 초기 설정과 db setting방법을 제공합니다. 
+   - [초기 설정](https://github.com/peer-42seoul/mission-peerflow-BE/issues/1)
+2. 협업을 위한 컨벤션을 지켜봅시다.
    - [컨벤션](docs/01-컨벤션.md)
-2. 기본적으로 엔티티 예시를 제공합니다.  
+3. 기본적으로 엔티티 예시를 제공합니다.  
    - ![](docs/image/peerflow-erd.png)
-3. 기본적으로 API 명세를 제공합니다.
+4. 기본적으로 API 명세를 제공합니다.
    - 더 좋은 방향으로 수정해도 좋습니다.
    - [API 명세](https://www.notion.so/peer-study/peerflow-api-5898f07da57546669a021e033fea47e9?pvs=4)
 
