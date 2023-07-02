@@ -1,16 +1,11 @@
 package com.peer.missionpeerflow.entity;
 
-import com.peer.missionpeerflow.repository.QuestionRepository;
-import com.peer.missionpeerflow.service.IndexService;
 import com.peer.missionpeerflow.util.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional

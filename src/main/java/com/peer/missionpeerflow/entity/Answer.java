@@ -1,7 +1,5 @@
 package com.peer.missionpeerflow.entity;
 
-import com.peer.missionpeerflow.dto.request.PostAnswerRequest;
-import com.peer.missionpeerflow.dto.request.UpdateAnswerRequest;
 import com.sun.istack.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,7 +17,6 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter

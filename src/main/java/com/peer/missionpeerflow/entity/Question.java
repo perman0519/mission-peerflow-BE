@@ -1,6 +1,5 @@
 package com.peer.missionpeerflow.entity;
 
-import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.util.Category;
 import com.peer.missionpeerflow.util.CategoryAttributeConverter;
 import java.time.LocalDateTime;
@@ -16,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

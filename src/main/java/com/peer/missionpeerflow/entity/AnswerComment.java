@@ -1,7 +1,5 @@
 package com.peer.missionpeerflow.entity;
 
-import com.peer.missionpeerflow.dto.request.AnswerCommentRequest;
-import com.peer.missionpeerflow.dto.request.QuestionCommentRequest;
 import com.sun.istack.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
