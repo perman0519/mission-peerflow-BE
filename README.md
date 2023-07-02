@@ -58,6 +58,7 @@ This is simple website Backend mission for searching 42 subject.
   - 수정 및 삭제의 댓글의 비밀번호로 판단합니다.
 
 > 늘 그랬듯 무조건 subject에 있는 그대로 구현해야하는 것은 아닙니다. 만들어보고 싶은 기능이 있다면 추가해도 좋고, 주어진 entity 양식이나, API 명세 및 백엔드 설계를 더 좋은 방향이라고 생각하는대로 수정해도 좋습니다. 지금은 학습을 위한 시간이니까요.
+
 > 다만 메인페이지에서 저장된 글들을 조회하고, 질문-답글-댓글의 CRUD, 추천, 채택과 같은 기능은 구현해야 합니다.
   
 ---
@@ -77,7 +78,7 @@ This is simple website Backend mission for searching 42 subject.
 - request를 실패했을 때 error handling과 http error status을 고려해봅시다.
 - 프론트와의 협업을 위해 swagger나, Spring REST docs를 적용해봅시다. 
 
-> 하지만 당연하게도 이 두가지는 필수가 아닙니다. 기능 요구 사항을 모두 충족하고 시간이 남는다면 도전해보세요.
+> 하지만 당연하게도 이 세가지는 필수가 아닙니다. 기능 요구 사항을 모두 충족하고 시간이 남는다면 도전해보세요.
 
 ---
 > 어떤 방식으로 구현하든 자유지만 왜 그렇게 구현했는지 스스로의 이유를 생각하면서 만들어봅시다!
