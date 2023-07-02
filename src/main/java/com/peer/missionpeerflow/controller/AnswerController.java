@@ -4,6 +4,8 @@ import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.request.PostAnswerRequest;
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.dto.request.UpdateAnswerRequest;
+import com.peer.missionpeerflow.entity.Answer;
+import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.service.AnswerService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,4 +36,12 @@ public class AnswerController {
 	public void deleteAnswer(@PathVariable(name = "answerId") Long answerId, @RequestBody @Valid DeleteRequest request) {
 		answerService.deleteAnswer(answerId, request);
 	}
+
+	@PostMapping("/{answerId}/recommend")
+	public String recommendAnswer(@PathVariable Long answerId) {
+		answerService.recommendAnswer(answerId);
+		return "redirect:/v1/answer" + answerId; // 해당 글로 리다이렉트
+	}
+
+
 }

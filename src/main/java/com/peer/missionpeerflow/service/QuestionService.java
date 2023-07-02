@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -35,6 +37,7 @@ public class QuestionService {
 		Question question = questionRepository.findById(questionId).
 				orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
 		question.setView(question.getView() + 1);
+		questionRepository.save(question);
 		return of(question);
 	}
 
@@ -65,5 +68,13 @@ public class QuestionService {
 			throw new ForbiddenException("유효하지 않은 비밀번호입니다.");
 			// 유효하지 않은 비밀번호 에러 던지기
 		}
+	}
+
+	public void recommendQuestion(Long questionId) {
+		Question question = questionRepository.findById(questionId).orElseThrow(() -> {
+			return new IllegalArgumentException("질문이 존재하지 않습니다");
+		});
+		question.setRecommend(question.getRecommend() + 1);
+		questionRepository.save(question);
 	}
 }

@@ -24,7 +24,6 @@ public abstract class BaseEntity {
 	protected String password;
 
 	@Column(nullable = false)
-	@Lob
 	protected String content;
 
 	@CreatedDate
