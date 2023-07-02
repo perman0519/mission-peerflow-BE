@@ -34,6 +34,7 @@ public class QuestionService {
 	public QuestionResponse getQuestion(long questionId) {
 		Question question = questionRepository.findById(questionId).
 				orElseThrow(() -> new NotFoundException("해당 Id의 질문이 존재하지 않습니다."));
+		question.setView(question.getView() + 1);
 		return of(question);
 	}
 
