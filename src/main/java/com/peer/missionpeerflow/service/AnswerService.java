@@ -45,4 +45,12 @@ public class AnswerService {
 			throw new ForbiddenException("유효하지 않은 비밀번호입니다.");
 		}
 	}
+
+	public void recommendAnswer(Long answerId) {
+		Answer answer = answerRespoitory.findById(answerId).orElseThrow(() -> {
+			return new IllegalArgumentException("답변이 존재하지 않습니다");
+		});
+		answer.setRecommend(answer.getRecommend() + 1);
+		answerRespoitory.save(answer);
+	}
 }

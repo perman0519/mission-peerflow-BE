@@ -38,4 +38,10 @@ public class QuestionController {
 		questionService.deleteQuestion(questionId, request);
 	}
 
+	@PostMapping("/{questionId}/recommend")
+	public String recommendQuestion(@PathVariable Long questionId) {
+		questionService.recommendQuestion(questionId);
+		return "redirect:/v1/question/" + questionId; // 해당 글로 리다이렉트
+	}
+
 }
