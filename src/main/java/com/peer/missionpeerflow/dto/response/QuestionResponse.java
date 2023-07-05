@@ -1,6 +1,5 @@
 package com.peer.missionpeerflow.dto.response;
 
-import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.entity.Answer;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.entity.QuestionComment;
@@ -14,31 +13,64 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QuestionResponse {
 
-    private long questionId;
+    private Long questionId;
     private String title;
     private int answerCount;
     private Category category;
-    private long recommend;
-    private long view;
+    private Long recommend;
+    private Long view;
     private String nickname;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private String content;
     private List<Answer> answerList;
     private List<QuestionComment> questionCommentList;
 
     @Builder
-    public QuestionResponse (Question question){
-        this.questionId = question.getQuestionId();
-        this.title = question.getTitle();
-        this.answerCount = question.getAnswerList().size();
-        this.category = question.getCategory();
-        this.recommend = question.getRecommend();
-        this.view = question.getView();
-        this.nickname = question.getNickname();
-        this.createdAt = question.getCreatedAt();
-        this.content = question.getContent();
-        this.answerList = getAnswerList();
-        this.questionCommentList = getQuestionCommentList();
+    public QuestionResponse (Long questionId, String title, String content, int answerCount, Category category, Long recommend, Long view, String nickname, LocalDateTime createdAt, LocalDateTime updatedAt, List<Answer> answerList, List<QuestionComment> questionCommentList)
+    {
+        this.questionId = questionId;
+        this.title = title;
+        this.answerCount = answerCount;
+        this.category = category;
+        this.recommend = recommend;
+        this.view = view;
+        this. nickname = nickname;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.content = content;
+        this.answerList = answerList;
+        this.questionCommentList = questionCommentList;
+    }
+
+    public static QuestionResponse fromQuestion(Question question){
+        return QuestionResponse.builder()
+                .questionId(question.getQuestionId())
+                .title(question.getTitle())
+                .answerCount(0)
+                .category(question.getCategory())
+                .recommend(question.getRecommend())
+                .view(question.getView())
+                .nickname(question.getNickname())
+                .createdAt(question.getCreatedAt())
+                .content(question.getContent())
+                .build();
+    }
+    public static QuestionResponse fromQuestionwithDetail(Question question){
+        return QuestionResponse.builder()
+                .questionId(question.getQuestionId())
+                .title(question.getTitle())
+                .answerCount(question.getAnswerList().size())
+                .category(question.getCategory())
+                .recommend(question.getRecommend())
+                .view(question.getView())
+                .nickname(question.getNickname())
+                .createdAt(question.getCreatedAt())
+                .content(question.getContent())
+                .updatedAt(question.getUpdatedAt())
+                .answerList(question.getAnswerList())
+                .questionCommentList(question.getQuestionCommentList())
+                .build();
     }
 
 }

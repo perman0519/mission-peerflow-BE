@@ -1,7 +1,7 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -10,6 +10,6 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5400/
+    url: jdbc:postgresql://localhost:5432/peer
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}

@@ -62,7 +62,4 @@ public class Question extends BaseEntity {
 		this.questionCommentList = questionCommentList;
 		this.createdAt = createdAt;
 	}
-
-
-
 }
