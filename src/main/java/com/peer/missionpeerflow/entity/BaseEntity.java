@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
-import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 
 @Data

@@ -2,6 +2,7 @@ package com.peer.missionpeerflow.entity;
 
 import com.peer.missionpeerflow.util.Category;
 import com.peer.missionpeerflow.util.CategoryAttributeConverter;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +25,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "question")
 @Entity
-@Setter
 public class Question extends BaseEntity {
 
 	@Id
@@ -48,5 +49,20 @@ public class Question extends BaseEntity {
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<QuestionComment> questionCommentList = new ArrayList<>();
+
+	@Builder
+	public Question(Long questionId, String title, Category category, String nickname, String password, String content,List<Answer> answerList, List<QuestionComment> questionCommentList, LocalDateTime createdAt) {
+		this.questionId = questionId;
+		this.title = title;
+		this.category = category;
+		this.nickname = nickname;
+		this.password = password;
+		this.content = content;
+		this.answerList = answerList;
+		this.questionCommentList = questionCommentList;
+		this.createdAt = createdAt;
+	}
+
+
 
 }
