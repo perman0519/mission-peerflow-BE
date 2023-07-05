@@ -24,7 +24,7 @@ class MissionPeerflowApplicationTests {
 				"this is so ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅁㅇㄹ", "miniRt");
 
 		this.questionService.create(questionRequest1);
-		QuestionResponse questionResponse = this.questionService.returnQuestion(questionRepository.findById(1L).get());
+		QuestionResponse questionResponse = this.questionService.getQuestionResponse(questionRepository.findById(1L).get());
 		System.out.println(questionResponse.getTitle());
 		System.out.println(questionResponse.getContent());
 	}
