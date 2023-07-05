@@ -35,18 +35,5 @@ public class QuestionService {
         return questionResponse;
     }
 
-    public Page<QuestionResponse> getQuestionResponsePages(int pageIndex, int pagingSize, String sort) {
-        Pageable pageable = PageRequest.of(pageIndex, pagingSize, Sort.by(sort).descending());
 
-        Page<Question> questionPages = this.questionRepository.findAll(pageable);
-        Page<QuestionResponse> questionResponsePages = questionPages.map(m -> QuestionResponse.fromQuestion(m));
-        return  questionResponsePages;
-    }
-
-    public Page<QuestionResponse> getQuestionResponsePages(int pageIndex, int pagingSize, String sort, String category) {
-        Pageable pageable = PageRequest.of(pageIndex, pagingSize, Sort.by(sort).descending());
-        Page<Question> questionPages = this.questionRepository.findByCategory(Category.ofType(category), pageable);
-        Page<QuestionResponse> questionResponsePages = questionPages.map(m -> QuestionResponse.fromQuestion(m));
-        return  questionResponsePages;
-    }
 }
