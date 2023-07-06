@@ -1,6 +1,8 @@
 package com.peer.missionpeerflow.entity;
 
 import com.sun.istack.NotNull;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -13,12 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Table(name = "answer")
 @Entity
@@ -42,4 +45,17 @@ public class Answer extends BaseEntity {
 	@OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<AnswerComment> answerCommentList = new ArrayList<>();
 
+
+	@Builder
+	public Answer(Question question, Long recommend, boolean isAdopted, String content, String password, String nickname, List<AnswerComment> answerCommentList, LocalDateTime createdAt, LocalDateTime updatedAt){
+		this.question = question;
+		this.recommend = recommend;
+		this.isAdopted = isAdopted;
+		this.content = content;
+		this.password = password;
+		this.nickname = nickname;
+		this.answerCommentList = answerCommentList;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
 }

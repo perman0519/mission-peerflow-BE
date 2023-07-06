@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  peerflow-database:
+    container_name: peerflow-database
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - peerflow-network
+
+  peerflow-application:
+    container_name: peerflow-application
+    image: peerflow-application
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - peerflow-database
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_URL=${POSTGRES_URL}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    restart: always
+    networks:
+      - peerflow-network
+
+networks:
+  peerflow-network:
+    driver: bridge
+
+volumes:
+  db-data:

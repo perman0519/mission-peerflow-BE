@@ -51,7 +51,7 @@ public class Question extends BaseEntity {
 	private List<QuestionComment> questionCommentList = new ArrayList<>();
 
 	@Builder
-	public Question(Long questionId, String title, Category category, String nickname, String password, String content,List<Answer> answerList, List<QuestionComment> questionCommentList, LocalDateTime createdAt) {
+	public Question(Long questionId, String title, Category category, String nickname, String password, String content,List<Answer> answerList, List<QuestionComment> questionCommentList, LocalDateTime createdAt, LocalDateTime updatedAt, Long view) {
 		this.questionId = questionId;
 		this.title = title;
 		this.category = category;
@@ -61,5 +61,7 @@ public class Question extends BaseEntity {
 		this.answerList = answerList;
 		this.questionCommentList = questionCommentList;
 		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.view = view;
 	}
 }
