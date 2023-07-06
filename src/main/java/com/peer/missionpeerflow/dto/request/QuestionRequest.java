@@ -24,13 +24,13 @@ public class QuestionRequest {
     private LocalDateTime createdAt;
 
     @Builder
-    public QuestionRequest(String title, String nickname, String password,  String content, String category)
+    public QuestionRequest(String title, String nickname, String password,  String content, String category, LocalDateTime createdAt)
     {
         this.title = title;
         this.nickname = nickname;
         this.password = password;
         this.category = Category.ofType(category);
         this.content = content;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = createdAt;
     }
 }

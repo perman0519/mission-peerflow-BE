@@ -1,12 +1,10 @@
 package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.response.QuestionResponse;
-import com.peer.missionpeerflow.repository.QuestionRepository;
 import com.peer.missionpeerflow.service.MainPageService;
 import com.peer.missionpeerflow.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

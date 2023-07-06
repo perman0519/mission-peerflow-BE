@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+
 @SpringBootTest
 class MissionPeerflowApplicationTests {
 
@@ -20,11 +22,11 @@ class MissionPeerflowApplicationTests {
 	@Test
 	void testService() {
 
-		QuestionRequest questionRequest1 = new QuestionRequest("으아아아아아아", "junssong", "1234",
-				"this is so ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅁㅇㄹ", "miniRt");
+		QuestionRequest questionRequest1 = new QuestionRequest("아니아니너무 어려웡", "hee", "1234",
+				"hahahahahahahahahah", "ft_irc", LocalDateTime.now());
 
 		this.questionService.create(questionRequest1);
-		QuestionResponse questionResponse = this.questionService.getQuestionResponse(questionRepository.findById(1L).get());
+		QuestionResponse questionResponse = this.questionService.getQuestionResponse(1L);
 		System.out.println(questionResponse.getTitle());
 		System.out.println(questionResponse.getContent());
 	}
