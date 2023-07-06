@@ -28,5 +28,4 @@ class MissionPeerflowApplicationTests {
 		System.out.println(questionResponse.getTitle());
 		System.out.println(questionResponse.getContent());
 	}
-
 }

@@ -6,6 +6,7 @@ import com.peer.missionpeerflow.service.MainPageService;
 import com.peer.missionpeerflow.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +31,8 @@ public class MainPageController {
     }
 
     @GetMapping("/search")
-    public Page<QuestionResponse> search (@RequestParam(value = "title", defaultValue = "")String category, @RequestParam(value = "sort", defaultValue = "createdAt") String sort) {
-        Page<QuestionResponse> paging = this.mainPageService.getQuestionResponsePages(0, 10, sort, category);
+    public Page<QuestionResponse> search (@RequestParam(value = "title", defaultValue = "")String title, @RequestParam(value = "sort", defaultValue = "createdAt") String sort) {
+        Page<QuestionResponse> paging = this.mainPageService.getSearchQuestionResponsePages(title, sort);
         return paging;
     }
 }
