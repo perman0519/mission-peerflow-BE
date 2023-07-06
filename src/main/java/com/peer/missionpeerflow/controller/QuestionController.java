@@ -2,7 +2,6 @@ package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.dto.response.QuestionDetailResponse;
-import com.peer.missionpeerflow.dto.response.QuestionResponse;
 import com.peer.missionpeerflow.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @PostMapping("")
-    public String create(@RequestBody QuestionRequest questionRequest){
+    public String create(@Valid @RequestBody QuestionRequest questionRequest){
         questionService.create(questionRequest);
         return "ok";
     }
@@ -30,6 +29,12 @@ public class QuestionController {
 
     @PutMapping("/{id}")
     public QuestionDetailResponse modify (@PathVariable("id") Long questionId) {
+        QuestionDetailResponse questionResponse = questionService.getQuestionDetailResponse(questionId);
+        return questionResponse;
+    }
+
+    @PutMapping("/{id}")
+    public QuestionDetailResponse delete (@PathVariable("id") Long questionId) {
         QuestionDetailResponse questionResponse = questionService.getQuestionDetailResponse(questionId);
         return questionResponse;
     }

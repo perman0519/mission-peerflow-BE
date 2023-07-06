@@ -8,15 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Table(name = "answer_comment")
 @Entity
-@Setter
 public class AnswerComment extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +29,16 @@ public class AnswerComment extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "answer_id")
 	private Answer answer;
+
+	@Builder
+	public AnswerComment (String content, String nickname, String password, LocalDateTime createdAt, LocalDateTime updatedAt, Answer answer)
+	{
+		this.content = content;
+		this.nickname = nickname;
+		this.password = password;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.answer = answer;
+	}
 
 }
