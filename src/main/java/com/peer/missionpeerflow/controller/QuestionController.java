@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/question")
+@RequestMapping("/v1/question")
 public class QuestionController {
 
     private final QuestionService questionService;
@@ -24,6 +24,12 @@ public class QuestionController {
 
     @GetMapping("/{id}")
     public QuestionDetailResponse detail (@PathVariable("id") Long questionId) {
+        QuestionDetailResponse questionResponse = questionService.getQuestionDetailResponse(questionId);
+        return questionResponse;
+    }
+
+    @PutMapping("/{id}")
+    public QuestionDetailResponse modify (@PathVariable("id") Long questionId) {
         QuestionDetailResponse questionResponse = questionService.getQuestionDetailResponse(questionId);
         return questionResponse;
     }
