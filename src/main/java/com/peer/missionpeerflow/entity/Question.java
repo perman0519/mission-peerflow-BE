@@ -64,4 +64,12 @@ public class Question extends BaseEntity {
 		this.updatedAt = updatedAt;
 		this.view = view;
 	}
+
+	public void update(String title, String nickname, Category category, String content, LocalDateTime updatedAt) {
+		this.title = title;
+		this.nickname = nickname;
+		this.category = category;
+		this.content = content;
+		this.updatedAt = updatedAt;
+	}
 }

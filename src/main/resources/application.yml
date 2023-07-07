@@ -10,7 +10,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${POSTGRES_URL}
+    url: jdbc:postgresql://localhost:5432/peer
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 

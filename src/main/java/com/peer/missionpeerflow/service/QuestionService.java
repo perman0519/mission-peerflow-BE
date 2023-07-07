@@ -1,5 +1,6 @@
 package com.peer.missionpeerflow.service;
 
+import com.peer.missionpeerflow.dto.request.QuestionModifyRequest;
 import com.peer.missionpeerflow.dto.request.QuestionRequest;
 import com.peer.missionpeerflow.dto.response.QuestionDetailResponse;
 import com.peer.missionpeerflow.dto.response.QuestionResponse;
@@ -22,8 +23,19 @@ public class QuestionService {
                 .password(questionRequest.getPassword())
                 .createdAt(questionRequest.getCreatedAt())
                 .category(questionRequest.getCategory())
+                .view(0L)
                 .build();
+        this.questionRepository.save(entity);
+    }
+
+    public void modify(QuestionModifyRequest questionModifyRequest, Long questionId) {
+        Question entity = questionRepository.findById(questionId).get();
+        entity.update(questionModifyRequest.getTitle(), questionModifyRequest.getNickname(), questionModifyRequest.getCategory(), questionModifyRequest.getContent(), questionModifyRequest.getUpdatedAt());
         questionRepository.save(entity);
+    }
+
+    public void delete(Long questionId) {
+        questionRepository.deleteById(questionId);
     }
 
     public QuestionDetailResponse getQuestionDetailResponse(Long questionId) {

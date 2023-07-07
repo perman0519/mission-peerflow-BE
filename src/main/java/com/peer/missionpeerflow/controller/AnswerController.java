@@ -19,15 +19,16 @@ public class AnswerController {
         return "ok";
     }
 
-    @PutMapping("/{id}")
-    public String modify(@PathVariable("id") Long answerId, @RequestBody AnswerRequest answerRequest)
-    {
-        return "ok";
-    }
-
-    @PostMapping("/{id}")
-    public String delete(@PathVariable("id") Long answerId, @RequestBody AnswerRequest answerRequest)
-    {
-        return "ok";
-    }
+//    @PutMapping("/{id}")
+//    public String maodify(@PathVariable("id") Long answerId, @RequestBody AnswerRequest answerRequest)
+//    {
+//        return "ok";
+//    }
+//
+//    @PostMapping("/{id}")
+//    public String delete(@PathVariable("id") Long answerId, @RequestBody AnswerRequest answerRequest)
+//    {
+//        return "ok";
+//    }
+//    스웨거 장단점 적용이 쉬움 코드범벅 peer개발 springRestDocs
 }

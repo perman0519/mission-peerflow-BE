@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class QuestionRequest {
+public class QuestionModifyRequest {
 
     @NotBlank
     private String title;
@@ -21,16 +21,16 @@ public class QuestionRequest {
     @NotBlank
     private String content;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @Builder
-    public QuestionRequest(String title, String nickname, String password, String category, String content, LocalDateTime createdAt)
+    public QuestionModifyRequest(String title, String nickname, String password, String category, String content, LocalDateTime createdAt)
     {
         this.title = title;
         this.nickname = nickname;
         this.password = password;
         this.category = Category.ofType(category);
         this.content = content;
-        this.createdAt = createdAt;
+        this.updatedAt = createdAt;
     }
 }
