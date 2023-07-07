@@ -7,9 +7,11 @@ import com.peer.missionpeerflow.dto.response.QuestionDetailResponse;
 import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.exception.GlobalControllerAdvice;
 import com.peer.missionpeerflow.service.QuestionService;
+import com.sun.tools.attach.AgentLoadException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 @RestController
@@ -28,6 +30,7 @@ public class QuestionController {
     @GetMapping("/{id}")
     public QuestionDetailResponse detail (@PathVariable("id") Long questionId) {
         QuestionDetailResponse questionResponse = questionService.getQuestionDetailResponse(questionId);
+        questionService.updateView(questionId);
         return questionResponse;
     }
 
@@ -35,7 +38,12 @@ public class QuestionController {
     public QuestionDetailResponse modify (@RequestBody QuestionModifyRequest questionModifyRequest, @PathVariable("id") Long questionId) {
         String questionPassword = questionService.getQuestion(questionId).getPassword();
         if (questionModifyRequest.getPassword().equals(questionPassword)) {
-            questionService.modify(questionModifyRequest, questionId);
+            try {
+                questionService.modify(questionModifyRequest, questionId);
+            }
+            catch (Exception e) {
+                throw new ForbiddenException("입력이 들어오지 않았습니다");
+            }
         }
         else {
             throw new ForbiddenException("비밀번호가 일치하지 않습니다.");

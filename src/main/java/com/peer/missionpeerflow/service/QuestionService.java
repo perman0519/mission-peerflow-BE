@@ -43,6 +43,12 @@ public class QuestionService {
         return questionDetailResponse;
     }
 
+    public void updateView(Long questionId) {
+        Question entity = questionRepository.findById(questionId).get();
+        entity.updateView(entity.getView() + 1);
+        questionRepository.save(entity);
+    }
+
     public QuestionResponse getQuestionResponse(Long questionId) {
         QuestionResponse questionResponse = QuestionResponse.fromQuestion(questionRepository.findById(questionId).get());
         return questionResponse;

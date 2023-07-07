@@ -6,15 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AnswerRequest {
 
-    @NotBlank
-    private String title;
-    @NotBlank
+    @NotNull
     private Long questionId;
     @NotBlank
     private String nickname;
@@ -22,16 +21,15 @@ public class AnswerRequest {
     private String password;
     @NotBlank
     private String content;
-
+    @NotNull
     private LocalDateTime createdAt;
 
     @Builder
-    public AnswerRequest(String title, String nickname, String password,  String content, Long qusetionId, LocalDateTime createdAt)
+    public AnswerRequest(String nickname, String password,  String content, Long questionId, LocalDateTime createdAt)
     {
-        this.title = title;
         this.nickname = nickname;
         this.password = password;
-        this.questionId = qusetionId;
+        this.questionId = questionId;
         this.content = content;
         this.createdAt = createdAt;
     }

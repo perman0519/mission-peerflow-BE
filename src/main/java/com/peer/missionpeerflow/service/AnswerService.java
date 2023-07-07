@@ -20,6 +20,7 @@ public class AnswerService {
                 .password(answerRequest.getPassword())
                 .question(questionService.getQuestion(answerRequest.getQuestionId()))
                 .createdAt(answerRequest.getCreatedAt())
+                .recommend(0L)
                 .build();
         answerRepository.save(entity);
     }

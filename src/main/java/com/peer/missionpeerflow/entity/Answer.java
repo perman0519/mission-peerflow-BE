@@ -1,5 +1,6 @@
 package com.peer.missionpeerflow.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import java.time.LocalDateTime;
@@ -34,6 +35,7 @@ public class Answer extends BaseEntity {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "question_id")
+	@JsonIgnore
 	private Question question;
 
 	@Column(nullable = false)

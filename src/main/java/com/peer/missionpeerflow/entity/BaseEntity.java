@@ -1,5 +1,6 @@
 package com.peer.missionpeerflow.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -20,6 +21,7 @@ public abstract class BaseEntity {
 	protected String nickname;
 
 	@Column(nullable = false, columnDefinition = "VARCHAR(10)")
+	@JsonIgnore
 	protected String password;
 
 	@Column(nullable = false)

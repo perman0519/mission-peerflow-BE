@@ -21,11 +21,11 @@ public class QuestionDetailResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private String content;
-    private List<Answer> answerList;
+    private List<AnswerResponse> answerResponseList;
     private List<QuestionComment> questionCommentList;
 
     @Builder
-    public QuestionDetailResponse (String title, String content, Category category, Long recommend, Long view, String nickname, LocalDateTime createdAt, LocalDateTime updatedAt, List<Answer> answerList, List<QuestionComment> questionCommentList)
+    public QuestionDetailResponse (String title, String content, Category category, Long recommend, Long view, String nickname, LocalDateTime createdAt, LocalDateTime updatedAt, List<AnswerResponse> answerResponseList, List<QuestionComment> questionCommentList)
     {
         this.title = title;
         this.category = category;
@@ -35,7 +35,7 @@ public class QuestionDetailResponse {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.content = content;
-        this.answerList = answerList;
+        this.answerResponseList = answerResponseList;
         this.questionCommentList = questionCommentList;
     }
 
@@ -45,7 +45,7 @@ public class QuestionDetailResponse {
                 .content(question.getContent())
                 .createdAt(question.getCreatedAt())
                 .updatedAt(question.getUpdatedAt())
-                .answerList(question.getAnswerList())
+//                .answerResponseList(question.getAnswerList().stream().map(m -> AnswerResponse.fromAnswer(m)).toList());
                 .title(question.getTitle())
                 .category(question.getCategory())
                 .recommend(question.getRecommend())

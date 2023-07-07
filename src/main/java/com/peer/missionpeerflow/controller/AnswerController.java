@@ -5,6 +5,8 @@ import com.peer.missionpeerflow.service.AnswerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/answer")
@@ -13,7 +15,7 @@ public class AnswerController {
     private final AnswerService answerService;
 
     @PostMapping("")
-    public String create(@RequestBody AnswerRequest answerRequest)
+    public String create(@Valid @RequestBody AnswerRequest answerRequest)
     {
         answerService.create(answerRequest);
         return "ok";

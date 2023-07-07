@@ -72,4 +72,8 @@ public class Question extends BaseEntity {
 		this.content = content;
 		this.updatedAt = updatedAt;
 	}
+
+	public void updateView(Long view) {
+		this.view = view;
+	}
 }

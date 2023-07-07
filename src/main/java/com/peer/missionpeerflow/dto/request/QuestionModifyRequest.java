@@ -4,6 +4,7 @@ import com.peer.missionpeerflow.util.Category;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -20,7 +21,7 @@ public class QuestionModifyRequest {
     private Category category;
     @NotBlank
     private String content;
-
+    @NotNull
     private LocalDateTime updatedAt;
 
     @Builder
