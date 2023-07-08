@@ -1,9 +1,9 @@
 package com.peer.missionpeerflow.dto.request.comment;
 
-import com.peer.missionpeerflow.entity.QuestionComment;
-import com.peer.missionpeerflow.service.QuestionService;
-import com.peer.missionpeerflow.util.Category;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
+import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QuestionCommentRequest {
 
-    @NotNull(message = "제목ID를 입력해주세요.")
+    @NotNull(message = "questionID를 입력해주세요.")
     private Long questionId;
     @NotBlank(message = "타입을 입력해주세요.")
     private String type;

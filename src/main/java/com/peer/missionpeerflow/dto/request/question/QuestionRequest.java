@@ -1,7 +1,10 @@
 package com.peer.missionpeerflow.dto.request.question;
 
 import com.peer.missionpeerflow.util.Category;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
+import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

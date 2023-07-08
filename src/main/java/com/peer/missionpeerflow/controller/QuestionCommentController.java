@@ -27,13 +27,13 @@ public class QuestionCommentController {
     }
 
     @GetMapping("")
-    public Page<QuestionCommentResponse> getPage (@RequestParam(value = "questionId") Long questionId, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "10") int size)
+    public Page<QuestionCommentResponse> getPage(@RequestParam(value = "questionId") Long questionId, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "10") int size)
     {
         return questionCommentService.getPage(questionId, page, size);
     }
 
     @PutMapping("/{commentId}")
-    public String modify (@Valid @RequestBody QuestionCommentModifyRequest questionCommentModifyRequest, @PathVariable("commentId") Long commentId)
+    public String modify(@Valid @RequestBody QuestionCommentModifyRequest questionCommentModifyRequest, @PathVariable("commentId") Long commentId)
     {
         if (questionCommentModifyRequest.getPassword().equals(questionCommentService.getComment(commentId).getPassword())) {
             questionCommentService.modify(commentId, questionCommentModifyRequest);
@@ -45,7 +45,7 @@ public class QuestionCommentController {
     }
 
     @PostMapping("/{commentId}")
-    public String delete (@Valid @RequestBody QuestionCommentDeleteRequest questionCommentDeleteRequest, @PathVariable("commentId") Long commentId)
+    public String delete(@Valid @RequestBody QuestionCommentDeleteRequest questionCommentDeleteRequest, @PathVariable("commentId") Long commentId)
     {
         if (questionCommentDeleteRequest.getPassword().equals(questionCommentService.getComment(commentId).getPassword())) {
             questionCommentService.delete(commentId);
