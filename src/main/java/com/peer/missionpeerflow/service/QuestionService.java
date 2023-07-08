@@ -1,13 +1,16 @@
 package com.peer.missionpeerflow.service;
 
-import com.peer.missionpeerflow.dto.request.QuestionModifyRequest;
-import com.peer.missionpeerflow.dto.request.QuestionRequest;
+import com.peer.missionpeerflow.dto.request.question.QuestionModifyRequest;
+import com.peer.missionpeerflow.dto.request.question.QuestionRequest;
 import com.peer.missionpeerflow.dto.response.QuestionDetailResponse;
 import com.peer.missionpeerflow.dto.response.QuestionResponse;
 import com.peer.missionpeerflow.entity.Question;
+import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +18,7 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
-    public void create(QuestionRequest questionRequest) {
+    public void create(@NotNull QuestionRequest questionRequest) {
         Question entity = Question.builder()
                 .title(questionRequest.getTitle())
                 .content(questionRequest.getContent())
@@ -28,8 +31,8 @@ public class QuestionService {
         this.questionRepository.save(entity);
     }
 
-    public void modify(QuestionModifyRequest questionModifyRequest, Long questionId) {
-        Question entity = questionRepository.findById(questionId).get();
+    public void modify(@NotNull QuestionModifyRequest questionModifyRequest, Long questionId) {
+        Question entity = getQuestion(questionId);
         entity.update(questionModifyRequest.getTitle(), questionModifyRequest.getNickname(), questionModifyRequest.getCategory(), questionModifyRequest.getContent(), questionModifyRequest.getUpdatedAt());
         questionRepository.save(entity);
     }
@@ -39,22 +42,22 @@ public class QuestionService {
     }
 
     public QuestionDetailResponse getQuestionDetailResponse(Long questionId) {
-        QuestionDetailResponse questionDetailResponse = QuestionDetailResponse.fromQuestion(questionRepository.findById(questionId).get());
+        QuestionDetailResponse questionDetailResponse = QuestionDetailResponse.fromQuestion(getQuestion(questionId));
         return questionDetailResponse;
     }
 
     public void updateView(Long questionId) {
-        Question entity = questionRepository.findById(questionId).get();
+        Question entity = getQuestion(questionId);
         entity.updateView(entity.getView() + 1);
         questionRepository.save(entity);
     }
 
     public QuestionResponse getQuestionResponse(Long questionId) {
-        QuestionResponse questionResponse = QuestionResponse.fromQuestion(questionRepository.findById(questionId).get());
+        QuestionResponse questionResponse = QuestionResponse.fromQuestion(getQuestion(questionId));
         return questionResponse;
     }
 
     public Question getQuestion(Long questionId) {
-        return questionRepository.findById(questionId).get();
+        return questionRepository.findById(questionId).orElseThrow(() -> new ForbiddenException("해당 게시글이 존재하지 않습니다."));
     }
 }

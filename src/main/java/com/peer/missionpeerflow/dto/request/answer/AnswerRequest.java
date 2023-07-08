@@ -1,4 +1,4 @@
-package com.peer.missionpeerflow.dto.request;
+package com.peer.missionpeerflow.dto.request.answer;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,15 +13,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AnswerRequest {
 
-    @NotNull
+    @NotNull(message = "질문 번호를 입력해주세요.")
     private Long questionId;
-    @NotBlank
+    @NotBlank(message = "닉네임을 입력해주세요.")
     private String nickname;
-    @NotBlank
+    @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
-    @NotBlank
+    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
-    @NotNull
+    @NotNull(message = "생성일 입력해주세요.")
     private LocalDateTime createdAt;
 
     @Builder

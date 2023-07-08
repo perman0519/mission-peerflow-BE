@@ -60,4 +60,10 @@ public class Answer extends BaseEntity {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
+
+	public void update(String content, String nickname, LocalDateTime updatedAt){
+		this.content = content;
+		this.nickname = nickname;
+		this.updatedAt = updatedAt;
+	}
 }

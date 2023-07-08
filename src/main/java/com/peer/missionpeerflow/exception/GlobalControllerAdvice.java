@@ -2,16 +2,33 @@ package com.peer.missionpeerflow.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalControllerAdvice {
 
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
-	public ResponseEntity methodArgumentNotValidException(MethodArgumentNotValidException e) {
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+	public ResponseEntity<Map<String, Object>>  methodArgumentNotValidException(MethodArgumentNotValidException e) {
+		Map<String, Object> response = new HashMap<>();
+		response.put("error", "Validation Error Or Bad Request");
+		response.put("message", "The provided data is not valid.");
+
+		Map<String, String> errors = new HashMap<>();
+		for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+			errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+		}
+		for (ObjectError globalError : e.getBindingResult().getGlobalErrors()) {
+			errors.put(globalError.getObjectName(), globalError.getDefaultMessage());
+		}
+		response.put("errors", errors);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 
 	@ExceptionHandler(value = ForbiddenException.class)

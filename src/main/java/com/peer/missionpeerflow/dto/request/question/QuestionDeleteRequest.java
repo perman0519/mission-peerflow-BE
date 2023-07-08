@@ -1,4 +1,4 @@
-package com.peer.missionpeerflow.dto.request;
+package com.peer.missionpeerflow.dto.request.question;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QuestionDeleteRequest {
 
-    @NotBlank
+    @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
 

@@ -1,17 +1,13 @@
 package com.peer.missionpeerflow.controller;
 
-import com.peer.missionpeerflow.dto.request.QuestionDeleteRequest;
-import com.peer.missionpeerflow.dto.request.QuestionModifyRequest;
-import com.peer.missionpeerflow.dto.request.QuestionRequest;
+import com.peer.missionpeerflow.dto.request.question.QuestionDeleteRequest;
+import com.peer.missionpeerflow.dto.request.question.QuestionModifyRequest;
+import com.peer.missionpeerflow.dto.request.question.QuestionRequest;
 import com.peer.missionpeerflow.dto.response.QuestionDetailResponse;
 import com.peer.missionpeerflow.exception.ForbiddenException;
-import com.peer.missionpeerflow.exception.GlobalControllerAdvice;
 import com.peer.missionpeerflow.service.QuestionService;
-import com.sun.tools.attach.AgentLoadException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 @RestController
@@ -35,15 +31,10 @@ public class QuestionController {
     }
 
     @PutMapping("/{id}")
-    public QuestionDetailResponse modify (@RequestBody QuestionModifyRequest questionModifyRequest, @PathVariable("id") Long questionId) {
+    public QuestionDetailResponse modify (@Valid @RequestBody QuestionModifyRequest questionModifyRequest, @PathVariable("id") Long questionId) {
         String questionPassword = questionService.getQuestion(questionId).getPassword();
         if (questionModifyRequest.getPassword().equals(questionPassword)) {
-            try {
-                questionService.modify(questionModifyRequest, questionId);
-            }
-            catch (Exception e) {
-                throw new ForbiddenException("입력이 들어오지 않았습니다");
-            }
+            questionService.modify(questionModifyRequest, questionId);
         }
         else {
             throw new ForbiddenException("비밀번호가 일치하지 않습니다.");

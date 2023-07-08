@@ -1,7 +1,12 @@
 package com.peer.missionpeerflow.controller;
 
-import com.peer.missionpeerflow.dto.request.AnswerRequest;
+import com.peer.missionpeerflow.dto.request.answer.AnswerDeleteRequest;
+import com.peer.missionpeerflow.dto.request.answer.AnswerModifyRequest;
+import com.peer.missionpeerflow.dto.request.answer.AnswerRequest;
+import com.peer.missionpeerflow.dto.response.QuestionDetailResponse;
+import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.service.AnswerService;
+import com.peer.missionpeerflow.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,24 +18,35 @@ import javax.validation.Valid;
 public class AnswerController {
 
     private final AnswerService answerService;
+    private final QuestionService questionService;
 
     @PostMapping("")
-    public String create(@Valid @RequestBody AnswerRequest answerRequest)
+    public QuestionDetailResponse create(@Valid @RequestBody AnswerRequest answerRequest)
     {
         answerService.create(answerRequest);
-        return "ok";
+        return questionService.getQuestionDetailResponse(answerRequest.getQuestionId());
     }
 
-//    @PutMapping("/{id}")
-//    public String maodify(@PathVariable("id") Long answerId, @RequestBody AnswerRequest answerRequest)
-//    {
-//        return "ok";
-//    }
-//
-//    @PostMapping("/{id}")
-//    public String delete(@PathVariable("id") Long answerId, @RequestBody AnswerRequest answerRequest)
-//    {
-//        return "ok";
-//    }
-//    스웨거 장단점 적용이 쉬움 코드범벅 peer개발 springRestDocs
+    @PutMapping("/{id}")
+    public QuestionDetailResponse modify(@PathVariable("id") Long answerId, @RequestBody @Valid AnswerModifyRequest answerModifyRequest)
+    {
+        if (answerModifyRequest.getPassword().equals(answerService.getAnswer(answerId).getPassword())) {
+            answerService.modify(answerId, answerModifyRequest);
+        } else {
+            throw new ForbiddenException("비밀번호가 일치하지 않습니다.");
+        }
+        return questionService.getQuestionDetailResponse(answerModifyRequest.getQuestionId());
+    }
+
+    @PostMapping("/{id}")
+    public QuestionDetailResponse delete(@PathVariable("id") Long answerId, @RequestBody @Valid AnswerDeleteRequest answerDeleteRequest)
+    {
+        Long questionId = answerService.getAnswer(answerId).getQuestion().getQuestionId();
+        if (answerDeleteRequest.getPassword().equals(answerService.getAnswer(answerId).getPassword())) {
+            answerService.delete(answerId);
+        } else {
+            throw new ForbiddenException("비밀번호가 일치하지 않습니다.");
+        }
+        return questionService.getQuestionDetailResponse(questionId);
+    }
 }
