@@ -3,6 +3,7 @@ package com.peer.missionpeerflow.service;
 import com.peer.missionpeerflow.dto.request.answer.AnswerModifyRequest;
 import com.peer.missionpeerflow.dto.request.answer.AnswerRequest;
 import com.peer.missionpeerflow.entity.Answer;
+import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.repository.AnswerRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,4 +49,15 @@ public class AnswerService {
         answerRepository.save(answer);
     }
 
+    public void updateAdopted(Long answerId){
+        Answer answer = getAnswer(answerId);
+        Question question = answer.getQuestion();
+        for (Answer a : question.getAnswerList()) {
+            if (a.getIsAdopted() == true) {
+                throw new ForbiddenException("이미 채택된 답변이 있습니다.");
+            }
+        }
+        answer.updateIsAdopted(true);
+        answerRepository.save(answer);
+    }
 }

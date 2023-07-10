@@ -55,4 +55,13 @@ public class AnswerController {
     public void updateRecommend(@PathVariable("id") Long answerId) {
         answerService.updateRecommend(answerId);
     }
+
+    @PostMapping("/isAdopted/{answerId}")
+    public void updateAdopted(@RequestBody @Valid AnswerDeleteRequest answerDeleteRequest, @PathVariable("answerId") Long answerId) {
+        if (answerDeleteRequest.getPassword().equals(answerService.getAnswer(answerId).getPassword())) {
+            answerService.updateAdopted(answerId);
+        } else {
+            throw new ForbiddenException("비밀번호가 일치하지 않습니다.");
+        }
+    }
 }

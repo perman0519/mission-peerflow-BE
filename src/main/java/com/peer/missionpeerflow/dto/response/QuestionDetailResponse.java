@@ -53,6 +53,13 @@ public class QuestionDetailResponse {
              public int compare(AnswerResponse a1, AnswerResponse a2) {
                  // 비교하고자 하는 필드에 따라서 정렬 기준을 설정합니다.
                  // 예시로, Answer 객체의 score 필드를 기준으로 내림차순 정렬합니다.
+                 if (a1.isAdopted() && !a2.isAdopted()) {
+                     return -1;
+                 } else if (!a1.isAdopted() && a2.isAdopted()) {
+                     return 1;
+                 }
+
+                 // isAdopted가 같은 경우 recommend 필드를 기준으로 내림차순 정렬합니다.
                  return Long.compare(a2.getRecommend(), a1.getRecommend());
              }
          };

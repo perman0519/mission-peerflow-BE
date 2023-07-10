@@ -68,4 +68,8 @@ public class Answer extends BaseEntity {
 	public void updateRecommend(Long recommend){
 		this.recommend = recommend;
 	}
+
+	public void updateIsAdopted(Boolean isAdopted){
+		this.isAdopted = isAdopted;
+	}
 }
