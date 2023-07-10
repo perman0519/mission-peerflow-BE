@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AnswerModifyRequest {
 
-    @NotNull(message = "질문 번호를 입력해주세요.")
-    private Long questionId;
     @NotBlank(message = "닉네임을 입력해주세요.")
     private String nickname;
     @NotBlank(message = "비밀번호를 입력해주세요.")
@@ -25,11 +23,10 @@ public class AnswerModifyRequest {
     private LocalDateTime updatedAt;
 
     @Builder
-    public AnswerModifyRequest(String nickname, String password,  String content, Long questionId, LocalDateTime updatedAt)
+    public AnswerModifyRequest(String nickname, String password,  String content, LocalDateTime updatedAt)
     {
         this.nickname = nickname;
         this.password = password;
-        this.questionId = questionId;
         this.content = content;
         this.updatedAt = updatedAt;
     }

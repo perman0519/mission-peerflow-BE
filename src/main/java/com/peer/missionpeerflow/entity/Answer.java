@@ -48,7 +48,7 @@ public class Answer extends BaseEntity {
 
 
 	@Builder
-	public Answer(Question question, Long recommend, boolean isAdopted, String content, String password, String nickname, List<AnswerComment> answerCommentList, LocalDateTime createdAt, LocalDateTime updatedAt){
+	public Answer(Question question, Long recommend, boolean isAdopted, String content, String password, String nickname, List<AnswerComment> answerCommentList, LocalDateTime createdAt){
 		this.question = question;
 		this.recommend = recommend;
 		this.isAdopted = isAdopted;
@@ -57,7 +57,6 @@ public class Answer extends BaseEntity {
 		this.nickname = nickname;
 		this.answerCommentList = answerCommentList;
 		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 	}
 
 	public void update(String content, String nickname, LocalDateTime updatedAt){

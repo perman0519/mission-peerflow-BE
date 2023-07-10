@@ -19,7 +19,7 @@ public class AnswerCommentResponse {
 
     @Builder
     public AnswerCommentResponse(String nickname, String content, LocalDateTime createdAt, LocalDateTime updatedAt, Long answerCommentId) {
-        this.type = "QuestionComment";
+        this.type = "AnswerComment";
         this.nickname = nickname;
         this.content = content;
         this.createdAt = createdAt;

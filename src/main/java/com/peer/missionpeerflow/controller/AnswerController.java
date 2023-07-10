@@ -4,6 +4,7 @@ import com.peer.missionpeerflow.dto.request.answer.AnswerDeleteRequest;
 import com.peer.missionpeerflow.dto.request.answer.AnswerModifyRequest;
 import com.peer.missionpeerflow.dto.request.answer.AnswerRequest;
 import com.peer.missionpeerflow.dto.response.QuestionDetailResponse;
+import com.peer.missionpeerflow.dto.response.QuestionResponse;
 import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.service.AnswerService;
 import com.peer.missionpeerflow.service.QuestionService;
@@ -35,7 +36,7 @@ public class AnswerController {
         } else {
             throw new ForbiddenException("비밀번호가 일치하지 않습니다.");
         }
-        return questionService.getQuestionDetailResponse(answerModifyRequest.getQuestionId());
+        return questionService.getQuestionDetailResponse(answerService.getAnswer(answerId).getQuestion().getQuestionId());
     }
 
     @PostMapping("/{id}")

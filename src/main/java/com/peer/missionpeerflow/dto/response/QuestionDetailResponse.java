@@ -14,18 +14,18 @@ import java.util.List;
 public class QuestionDetailResponse {
 
     private String type;
-    private String title;
     private Category category;
+    private String nickname;
+    private String title;
+    private String content;
     private Long recommend;
     private Long view;
-    private String nickname;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String content;
-    private List<AnswerResponse> answerResponseList;
+    private List<AnswerResponse> answerList;
 
     @Builder
-    public QuestionDetailResponse (String type, String title, String content, Category category, Long recommend, Long view, String nickname, LocalDateTime createdAt, LocalDateTime updatedAt, List<AnswerResponse> answerResponseList)
+    public QuestionDetailResponse (String type, String title, String content, Category category, Long recommend, Long view, String nickname, LocalDateTime createdAt, LocalDateTime updatedAt, List<AnswerResponse> answerList)
     {
         this.type = type;
         this.title = title;
@@ -36,7 +36,7 @@ public class QuestionDetailResponse {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.content = content;
-        this.answerResponseList = answerResponseList;
+        this.answerList = answerList;
     }
 
      public static List<AnswerResponse> convertToAnswerResponseList(List<Answer> answerList) {
@@ -55,7 +55,7 @@ public class QuestionDetailResponse {
                 .content(question.getContent())
                 .createdAt(question.getCreatedAt())
                 .updatedAt(question.getUpdatedAt())
-                .answerResponseList(convertToAnswerResponseList(question.getAnswerList()))
+                .answerList(convertToAnswerResponseList(question.getAnswerList()))
                 .title(question.getTitle())
                 .category(question.getCategory())
                 .recommend(question.getRecommend())

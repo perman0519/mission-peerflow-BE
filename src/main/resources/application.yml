@@ -10,7 +10,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://peerflow-database:5432/peer
+    url: jdbc:postgresql://localhost:5432/peer
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
 

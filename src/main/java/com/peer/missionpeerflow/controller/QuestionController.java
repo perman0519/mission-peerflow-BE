@@ -44,7 +44,7 @@ public class QuestionController {
     }
 
     @PostMapping("/{id}")
-    public String delete (@RequestBody QuestionDeleteRequest questionDeleteRequest, @PathVariable("id") Long questionId) {
+    public String delete (@RequestBody @Valid QuestionDeleteRequest questionDeleteRequest, @PathVariable("id") Long questionId) {
         String questionPassword = questionService.getQuestion(questionId).getPassword();
         if (questionDeleteRequest.getPassword().equals(questionPassword)) {
             questionService.delete(questionId);

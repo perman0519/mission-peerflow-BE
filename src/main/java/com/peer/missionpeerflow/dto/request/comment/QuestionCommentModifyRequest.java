@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QuestionCommentModifyRequest {
 
-    @NotNull(message = "제목ID를 입력해주세요.")
-    private Long questionId;
     @NotBlank(message = "타입을 입력해주세요.")
     private String type;
     @NotBlank(message = "닉네임을 입력해주세요.")
@@ -27,9 +25,8 @@ public class QuestionCommentModifyRequest {
     private LocalDateTime updatedAt;
 
     @Builder
-    public QuestionCommentModifyRequest (LocalDateTime updatedAt, Long questionId, String type, String nickname, String password, String content)
+    public QuestionCommentModifyRequest (LocalDateTime updatedAt, String type, String nickname, String password, String content)
     {
-        this.questionId = questionId;
         this.type = type;
         this.nickname = nickname;
         this.password = password;
