@@ -5,7 +5,6 @@ import com.peer.missionpeerflow.util.Category;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

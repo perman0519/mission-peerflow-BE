@@ -4,7 +4,7 @@ import com.peer.missionpeerflow.dto.request.comment.QuestionCommentDeleteRequest
 import com.peer.missionpeerflow.dto.request.comment.QuestionCommentModifyRequest;
 import com.peer.missionpeerflow.dto.request.comment.QuestionCommentRequest;
 import com.peer.missionpeerflow.dto.response.QuestionCommentResponse;
-import com.peer.missionpeerflow.exception.ForbiddenException;
+import com.peer.missionpeerflow.exception.UnauthorizedException;
 import com.peer.missionpeerflow.service.QuestionCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -39,7 +39,7 @@ public class QuestionCommentController {
             questionCommentService.modify(commentId, questionCommentModifyRequest);
         }
         else {
-            throw new ForbiddenException("비밀번호가 일치하지 않습니다.");
+            throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
         }
         return "ok";
     }
@@ -51,7 +51,7 @@ public class QuestionCommentController {
             questionCommentService.delete(commentId);
         }
         else {
-            throw new ForbiddenException("비밀번호가 일치하지 않습니다.");
+            throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
         }
         return "ok";
     }

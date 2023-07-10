@@ -41,8 +41,7 @@ public class AnswerCommentService {
     {
         Pageable pageable = PageRequest.of(page, size);
         Page<AnswerComment> answerCommentsPage = answerCommentRepository.findByAnswer(answerService.getAnswer(answerId), pageable);
-        Page<AnswerCommentResponse> answerCommentResponsePage = answerCommentsPage.map(m -> AnswerCommentResponse.fromAnswer(m));
-        return answerCommentResponsePage;
+        return answerCommentsPage.map(m -> AnswerCommentResponse.fromAnswer(m));
     }
 
     public void modify(Long commentId, AnswerCommentModifyRequest answerCommentModifyRequest)

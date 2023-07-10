@@ -4,9 +4,9 @@ import com.peer.missionpeerflow.exception.NotFoundException;
 import java.util.Arrays;
 
 public enum Category {
-	MINISHELL(1, "minishell"),
-	MINIRT(2, "miniRt"),
-	FT_IRC(3, "ft_irc");
+	MINISHELL(1, "MINISHELL"),
+	MINIRT(2, "MINIRT"),
+	FT_IRC(3, "FT_IRC");
 
 	private final int code;
 	private final String type;

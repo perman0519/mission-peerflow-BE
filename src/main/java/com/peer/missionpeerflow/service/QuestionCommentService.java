@@ -35,16 +35,14 @@ public class QuestionCommentService {
     }
 
     public QuestionComment getComment(Long commentId){
-        QuestionComment questionComment = questionCommentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
-        return questionComment;
+        return questionCommentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
     }
 
     public Page<QuestionCommentResponse> getPage(Long questionId, int page, int size)
     {
         Pageable pageable = PageRequest.of(page, size);
         Page<QuestionComment> questionCommentPage = questionCommentRepository.findByQuestion(questionService.getQuestion(questionId), pageable);
-        Page<QuestionCommentResponse> questionCommentResponsePage = questionCommentPage.map(m -> QuestionCommentResponse.fromQuestion(m));
-        return questionCommentResponsePage;
+        return questionCommentPage.map(m -> QuestionCommentResponse.fromQuestion(m));
     }
 
     public void modify(Long commentId, QuestionCommentModifyRequest questionCommentModifyRequest)

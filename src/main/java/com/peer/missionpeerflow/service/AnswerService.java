@@ -5,6 +5,7 @@ import com.peer.missionpeerflow.dto.request.answer.AnswerRequest;
 import com.peer.missionpeerflow.entity.Answer;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.exception.ForbiddenException;
+import com.peer.missionpeerflow.exception.NotFoundException;
 import com.peer.missionpeerflow.repository.AnswerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,7 @@ public class AnswerService {
     }
 
     public Answer getAnswer(Long answerId){
-        Answer answer = answerRepository.findById(answerId).orElseThrow(() -> new ForbiddenException("해당 답변이 없습니다."));
-        return answer;
+        return answerRepository.findById(answerId).orElseThrow(() -> new NotFoundException("해당 답변이 없습니다."));
     }
 
     public void delete(Long answerId){
@@ -53,7 +53,7 @@ public class AnswerService {
         Answer answer = getAnswer(answerId);
         Question question = answer.getQuestion();
         for (Answer a : question.getAnswerList()) {
-            if (a.getIsAdopted() == true) {
+            if (a.getIsAdopted()) {
                 throw new ForbiddenException("이미 채택된 답변이 있습니다.");
             }
         }

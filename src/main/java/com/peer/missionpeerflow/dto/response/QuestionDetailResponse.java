@@ -63,7 +63,6 @@ public class QuestionDetailResponse {
                  return Long.compare(a2.getRecommend(), a1.getRecommend());
              }
          };
-
          // answerList를 정렬합니다.
          Collections.sort(answerResponseList, answerComparator);
         return answerResponseList;

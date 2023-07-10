@@ -1,5 +1,6 @@
 package com.peer.missionpeerflow.exception;
 
+import com.sun.net.httpserver.HttpsServer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -7,6 +8,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,38 +19,72 @@ public class GlobalControllerAdvice {
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
 	public ResponseEntity<Map<String, Object>>  methodArgumentNotValidException(MethodArgumentNotValidException e) {
 		Map<String, Object> response = new HashMap<>();
-		response.put("error", "Validation Error Or Bad Request");
-		response.put("message", "The provided data is not valid.");
-
 		Map<String, String> errors = new HashMap<>();
 		for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
 			errors.put(fieldError.getField(), fieldError.getDefaultMessage());
 		}
-		for (ObjectError globalError : e.getBindingResult().getGlobalErrors()) {
-			errors.put(globalError.getObjectName(), globalError.getDefaultMessage());
-		}
-		response.put("errors", errors);
+		response.put("error", errors);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 
 	@ExceptionHandler(value = ForbiddenException.class)
 	public ResponseEntity forbiddenException(ForbiddenException e) {
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+//		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+		Map<String, Object> response = new HashMap<>();
+		Map<String, String> error = new HashMap<>();
+		error.put("Forbidden", e.getMessage());
+		response.put("error", error);
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+	}
+
+//	@ExceptionHandler(value = InvalidFormatException.class)
+//	public ResponseEntity invalidFormatException(InvalidFormatException e) {
+////		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+//		Map<String, Object> response = new HashMap<>();
+//		Map<String, String> error = new HashMap<>();
+//		error.put("InvalidFormat", e.getMessage());
+//		response.put("error", error);
+//		return ResponseEntity.status(HttpStatus.In).body(response);
+//	}
+
+	@ExceptionHandler(value = UnauthorizedException.class)
+	public ResponseEntity UnauthorizedException(UnauthorizedException e) {
+//		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+		Map<String, Object> response = new HashMap<>();
+		Map<String, String> error = new HashMap<>();
+		error.put("Unauthorized", e.getMessage());
+		response.put("error", error);
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
 	}
 
 	@ExceptionHandler(value = NotFoundException.class)
 	public ResponseEntity notFoundException(NotFoundException e) {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		Map<String, Object> response = new HashMap<>();
+		Map<String, String> error = new HashMap<>();
+		error.put("NotFound", e.getMessage());
+		response.put("error", error);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	}
 
 	@ExceptionHandler(value = ConflictException.class)
 	public ResponseEntity conflictException(ConflictException e) {
-		return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+//		return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+		Map<String, Object> response = new HashMap<>();
+		Map<String, String> error = new HashMap<>();
+		error.put("Conflict", e.getMessage());
+		response.put("error", error);
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 	}
 
 	@ExceptionHandler(value = Exception.class)
 	public ResponseEntity exception(Exception e) {
 //		e.printStackTrace(); 디버깅용 코드
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		Map<String, Object> response = new HashMap<>();
+		Map<String, String> error = new HashMap<>();
+		error.put("BAD_REQUEST", e.getMessage());
+		response.put("error", error);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 }

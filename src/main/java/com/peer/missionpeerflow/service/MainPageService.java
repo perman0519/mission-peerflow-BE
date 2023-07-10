@@ -38,21 +38,18 @@ public class MainPageService {
         Pageable pageable = PageRequest.of(pageIndex, pagingSize, Sort.by(sort).descending());
 
         Page<Question> questionPages = this.questionRepository.findAll(pageable);
-        Page<QuestionResponse> questionResponsePages = questionPages.map(m -> QuestionResponse.fromQuestion(m));
-        return  questionResponsePages;
+        return questionPages.map(m -> QuestionResponse.fromQuestion(m));
     }
 
     public Page<QuestionResponse> getQuestionResponsePages(int pageIndex, int pagingSize, String sort, String category) {
         Pageable pageable = PageRequest.of(pageIndex, pagingSize, Sort.by(sort).descending());
         Page<Question> questionPages = this.questionRepository.findByCategory(Category.ofType(category), pageable);
-        Page<QuestionResponse> questionResponsePages = questionPages.map(m -> QuestionResponse.fromQuestion(m));
-        return  questionResponsePages;
+        return questionPages.map(m -> QuestionResponse.fromQuestion(m));
     }
     public Page<QuestionResponse> getSearchQuestionResponsePages(String title, String sort) {
         Pageable pageable = PageRequest.of(0, 10, Sort.by(sort).descending());
         Specification<Question> spec = this.search(title);
         Page<Question> questionPages = this.questionRepository.findAll(spec, pageable);
-        Page<QuestionResponse> questionResponsePages = questionPages.map(m -> QuestionResponse.fromQuestion(m));
-        return  questionResponsePages;
+        return questionPages.map(m -> QuestionResponse.fromQuestion(m));
     }
 }
