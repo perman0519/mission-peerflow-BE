@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
-    Page<Question> findAll(Pageable pageable);
+    Page<Question> findBy(Pageable pageable);
     Page<Question> findByCategory(Category category, Pageable pageable);
     Page<Question> findByTitle(String title, Pageable pageable);
     Page<Question> findAll(Specification<Question> spec, Pageable pageable);

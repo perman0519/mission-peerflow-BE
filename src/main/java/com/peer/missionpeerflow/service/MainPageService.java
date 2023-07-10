@@ -37,7 +37,7 @@ public class MainPageService {
     public Page<QuestionResponse> getQuestionResponsePages(int pageIndex, int pagingSize, String sort) {
         Pageable pageable = PageRequest.of(pageIndex, pagingSize, Sort.by(sort).descending());
 
-        Page<Question> questionPages = this.questionRepository.findAll(pageable);
+        Page<Question> questionPages = this.questionRepository.findBy(pageable);
         return questionPages.map(m -> QuestionResponse.fromQuestion(m));
     }
 
