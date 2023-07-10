@@ -54,4 +54,9 @@ public class QuestionController {
         }
         return "ok";
     }
+
+    @PatchMapping("/{id}")
+    public void updateRecommend(@PathVariable("id") Long questionId) {
+        questionService.updateRecommend(questionId);
+    }
 }

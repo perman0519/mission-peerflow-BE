@@ -60,4 +60,10 @@ public class QuestionService {
     public Question getQuestion(Long questionId) {
         return questionRepository.findById(questionId).orElseThrow(() -> new ForbiddenException("해당 게시글이 존재하지 않습니다."));
     }
+
+    public void updateRecommend(Long questionId) {
+        Question entity = getQuestion(questionId);
+        entity.updateRecommend(entity.getRecommend() + 1);
+        questionRepository.save(entity);
+    }
 }

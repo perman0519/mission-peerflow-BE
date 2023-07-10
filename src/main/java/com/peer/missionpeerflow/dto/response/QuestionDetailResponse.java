@@ -7,6 +7,8 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Getter
@@ -46,6 +48,17 @@ public class QuestionDetailResponse {
              AnswerResponse answerResponse = AnswerResponse.fromAnswer(answer);
             answerResponseList.add(answerResponse);
         }
+         Comparator<AnswerResponse> answerComparator = new Comparator<AnswerResponse>() {
+             @Override
+             public int compare(AnswerResponse a1, AnswerResponse a2) {
+                 // 비교하고자 하는 필드에 따라서 정렬 기준을 설정합니다.
+                 // 예시로, Answer 객체의 score 필드를 기준으로 내림차순 정렬합니다.
+                 return Long.compare(a2.getRecommend(), a1.getRecommend());
+             }
+         };
+
+         // answerList를 정렬합니다.
+         Collections.sort(answerResponseList, answerComparator);
         return answerResponseList;
     }
     public static QuestionDetailResponse fromQuestion(Question question){

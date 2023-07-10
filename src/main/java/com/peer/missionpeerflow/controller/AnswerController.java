@@ -50,4 +50,9 @@ public class AnswerController {
         }
         return questionService.getQuestionDetailResponse(questionId);
     }
+
+    @PatchMapping("/{id}")
+    public void updateRecommend(@PathVariable("id") Long answerId) {
+        answerService.updateRecommend(answerId);
+    }
 }

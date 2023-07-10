@@ -64,4 +64,8 @@ public class Answer extends BaseEntity {
 		this.nickname = nickname;
 		this.updatedAt = updatedAt;
 	}
+
+	public void updateRecommend(Long recommend){
+		this.recommend = recommend;
+	}
 }

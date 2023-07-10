@@ -42,4 +42,10 @@ public class AnswerService {
         answerRepository.deleteById(answerId);
     }
 
+    public void updateRecommend(Long answerId){
+        Answer answer = getAnswer(answerId);
+        answer.updateRecommend(answer.getRecommend() + 1);
+        answerRepository.save(answer);
+    }
+
 }

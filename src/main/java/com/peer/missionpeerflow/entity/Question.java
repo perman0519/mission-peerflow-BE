@@ -70,6 +70,10 @@ public class Question extends BaseEntity {
 		this.updatedAt = updatedAt;
 	}
 
+	public void updateRecommend(Long recommend) {
+		this.recommend = recommend;
+	}
+
 	public void updateView(Long view) {
 		this.view = view;
 	}
