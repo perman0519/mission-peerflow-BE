@@ -17,12 +17,12 @@ public class MainPageController {
     private final MainPageService mainPageService;
 
     @GetMapping("")
-    public Page<QuestionResponse> mainPage (@RequestParam(value = "category", defaultValue = "null")String category, @RequestParam(value = "sort", defaultValue = "createdAt") String sort, @RequestParam(value = "pagingIndex", defaultValue = "0") int pagingIndex, @RequestParam(value = "pagingSize", defaultValue = "10") int pagingSize) {
+    public Page<QuestionResponse> mainPage (@RequestParam(value = "category", defaultValue = "null")String category, @RequestParam(value = "sort", defaultValue = "createdAt") String sort, @RequestParam(value = "pageIndex", defaultValue = "0") int pageIndex, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         if (category.equals("null"))
         {
-            return this.mainPageService.getQuestionResponsePages(pagingIndex, pagingSize, sort);
+            return this.mainPageService.getQuestionResponsePages(pageIndex, pageSize, sort);
         }
-        return this.mainPageService.getQuestionResponsePages(pagingIndex, pagingSize, sort, category);
+        return this.mainPageService.getQuestionResponsePages(pageIndex, pageSize, sort, category);
     }
 
     @GetMapping("/search")

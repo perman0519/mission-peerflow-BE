@@ -1,15 +1,11 @@
 package com.peer.missionpeerflow.exception;
 
-import com.sun.net.httpserver.HttpsServer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.HashMap;
 import java.util.*;
@@ -34,7 +30,6 @@ public class GlobalControllerAdvice {
 
 	@ExceptionHandler(value = ForbiddenException.class)
 	public ResponseEntity forbiddenException(ForbiddenException e) {
-//		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
 		Map<String, Object> response = new HashMap<>();
 		Map<String, String> error = new HashMap<>();
 		error.put("message", e.getMessage());
