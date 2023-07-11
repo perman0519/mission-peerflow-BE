@@ -9,6 +9,7 @@ import com.peer.missionpeerflow.exception.NotFoundException;
 import com.peer.missionpeerflow.repository.AnswerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class AnswerService {
     private final AnswerRepository answerRepository;
     private final QuestionService questionService;
 
+    @Transactional
     public void create(AnswerRequest answerRequest){
         Answer entity = Answer.builder()
                 .content(answerRequest.getContent())
@@ -28,26 +30,31 @@ public class AnswerService {
         answerRepository.save(entity);
     }
 
+    @Transactional
     public void modify(Long answerId, AnswerModifyRequest answerModifyRequest){
         Answer answer = getAnswer(answerId);
         answer.update(answerModifyRequest.getContent(), answerModifyRequest.getNickname());
         answerRepository.save(answer);
     }
 
+    @Transactional
     public Answer getAnswer(Long answerId){
         return answerRepository.findById(answerId).orElseThrow(() -> new NotFoundException("해당 답변이 없습니다."));
     }
 
+    @Transactional
     public void delete(Long answerId){
         answerRepository.deleteById(answerId);
     }
 
+    @Transactional
     public void updateRecommend(Long answerId){
         Answer answer = getAnswer(answerId);
         answer.updateRecommend(answer.getRecommend() + 1);
         answerRepository.save(answer);
     }
 
+    @Transactional
     public void updateAdopted(Long answerId){
         Answer answer = getAnswer(answerId);
         Question question = answer.getQuestion();

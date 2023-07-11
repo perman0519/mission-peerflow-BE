@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @Table(name = "question_comment")
 @Entity
 public class QuestionComment extends BaseEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long questionCommentId;

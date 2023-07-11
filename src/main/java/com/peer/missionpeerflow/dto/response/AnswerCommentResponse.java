@@ -1,7 +1,6 @@
 package com.peer.missionpeerflow.dto.response;
 
 import com.peer.missionpeerflow.entity.AnswerComment;
-import com.peer.missionpeerflow.entity.QuestionComment;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,7 +1,6 @@
 package com.peer.missionpeerflow.exception;
 
 import org.hibernate.exception.DataException;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -46,12 +45,6 @@ public class GlobalControllerAdvice {
 		error.put("message", e.getMessage());
 		response.put("error", error);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-	}
-
-	@ExceptionHandler(DataAccessException.class)
-	public ResponseEntity handleDataAccessException(DataAccessException e) {
-		String errorMessage = "An error occurred while accessing the database.";
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 	}
 
 //	@ExceptionHandler(value = InvalidFormatException.class)

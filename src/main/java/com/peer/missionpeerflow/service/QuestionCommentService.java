@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -18,12 +19,12 @@ public class QuestionCommentService {
 
     private final QuestionService questionService;
     private final QuestionCommentRepository questionCommentRepository;
-
+    @Transactional
     public void create(QuestionCommentRequest questionCommentRequest)
     {
         questionCommentRepository.save(toEntity(questionCommentRequest));
     }
-
+    @Transactional
     public QuestionComment toEntity(QuestionCommentRequest questionCommentRequest){
         return QuestionComment.builder()
                 .question(questionService.getQuestion(questionCommentRequest.getQuestionId()))
@@ -32,11 +33,11 @@ public class QuestionCommentService {
                 .content(questionCommentRequest.getContent())
                 .build();
     }
-
+    @Transactional
     public QuestionComment getComment(Long commentId){
         return questionCommentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
     }
-
+    @Transactional
     public Page<QuestionCommentResponse> getPage(Long questionId, int page, int size)
     {
         Pageable pageable = PageRequest.of(page, size);
@@ -44,6 +45,7 @@ public class QuestionCommentService {
         return questionCommentPage.map(m -> QuestionCommentResponse.fromQuestion(m));
     }
 
+    @Transactional
     public void modify(Long commentId, QuestionCommentModifyRequest questionCommentModifyRequest)
     {
         QuestionComment questionComment = getComment(commentId);
@@ -51,7 +53,7 @@ public class QuestionCommentService {
         questionCommentRepository.save(questionComment);
 
     }
-
+    @Transactional
     public void delete(Long commentId)
     {
         questionCommentRepository.deleteById(commentId);

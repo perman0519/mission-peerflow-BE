@@ -48,8 +48,7 @@ public class Question extends BaseEntity {
 	private List<QuestionComment> questionCommentList = new ArrayList<>();
 
 	@Builder
-	public Question(Long questionId, String title, Category category, String nickname, String password, String content,List<Answer> answerList, List<QuestionComment> questionCommentList, Long view) {
-		this.questionId = questionId;
+	public Question(String title, Category category, String nickname, String password, String content,List<Answer> answerList, List<QuestionComment> questionCommentList, Long view) {
 		this.title = title;
 		this.category = category;
 		this.nickname = nickname;

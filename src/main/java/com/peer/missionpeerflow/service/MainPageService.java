@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -34,6 +35,7 @@ public class MainPageService {
         };
     }
 
+    @Transactional
     public Page<QuestionResponse> getQuestionResponsePages(int pageIndex, int pagingSize, String sort) {
         Pageable pageable = PageRequest.of(pageIndex, pagingSize, Sort.by(sort).descending());
 
@@ -41,11 +43,14 @@ public class MainPageService {
         return questionPages.map(m -> QuestionResponse.fromQuestion(m));
     }
 
+    @Transactional
     public Page<QuestionResponse> getQuestionResponsePages(int pageIndex, int pagingSize, String sort, String category) {
         Pageable pageable = PageRequest.of(pageIndex, pagingSize, Sort.by(sort).descending());
         Page<Question> questionPages = this.questionRepository.findByCategory(Category.ofType(category), pageable);
         return questionPages.map(m -> QuestionResponse.fromQuestion(m));
     }
+
+    @Transactional
     public Page<QuestionResponse> getSearchQuestionResponsePages(String title, String sort) {
         Pageable pageable = PageRequest.of(0, 10, Sort.by(sort).descending());
         Specification<Question> spec = this.search(title);
