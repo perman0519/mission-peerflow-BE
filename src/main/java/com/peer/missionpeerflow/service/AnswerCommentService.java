@@ -29,7 +29,6 @@ public class AnswerCommentService {
                 .nickname(answerCommentRequest.getNickname())
                 .password(answerCommentRequest.getPassword())
                 .content(answerCommentRequest.getContent())
-                .createdAt(answerCommentRequest.getCreatedAt())
                 .build();
     }
 
@@ -47,8 +46,7 @@ public class AnswerCommentService {
     public void modify(Long commentId, AnswerCommentModifyRequest answerCommentModifyRequest)
     {
         AnswerComment answerComment = getAnswerComment(commentId);
-        answerComment.setNickname(answerCommentModifyRequest.getNickname());
-        answerComment.setContent(answerCommentModifyRequest.getContent());
+        answerComment.updateAnswerComment(answerCommentModifyRequest.getNickname(), answerCommentModifyRequest.getContent());
         answerCommentRepository.save(answerComment);
     }
 

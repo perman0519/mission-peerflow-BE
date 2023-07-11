@@ -23,7 +23,6 @@ public class AnswerService {
                 .nickname(answerRequest.getNickname())
                 .password(answerRequest.getPassword())
                 .question(questionService.getQuestion(answerRequest.getQuestionId()))
-                .createdAt(answerRequest.getCreatedAt())
                 .recommend(0L)
                 .build();
         answerRepository.save(entity);
@@ -31,7 +30,7 @@ public class AnswerService {
 
     public void modify(Long answerId, AnswerModifyRequest answerModifyRequest){
         Answer answer = getAnswer(answerId);
-        answer.update(answerModifyRequest.getContent(), answerModifyRequest.getNickname(), answerModifyRequest.getUpdatedAt());
+        answer.update(answerModifyRequest.getContent(), answerModifyRequest.getNickname());
         answerRepository.save(answer);
     }
 

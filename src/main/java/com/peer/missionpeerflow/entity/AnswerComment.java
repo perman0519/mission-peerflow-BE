@@ -13,8 +13,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Getter
 @NoArgsConstructor
 @Table(name = "answer_comment")
@@ -30,14 +28,18 @@ public class AnswerComment extends BaseEntity {
 	private Answer answer;
 
 	@Builder
-	public AnswerComment (String content, String nickname, String password, LocalDateTime createdAt, LocalDateTime updatedAt, Answer answer)
+	public AnswerComment (String content, String nickname, String password, Answer answer)
 	{
 		this.content = content;
 		this.nickname = nickname;
 		this.password = password;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 		this.answer = answer;
+	}
+
+	public void updateAnswerComment (String content, String nickname)
+	{
+		this.content = content;
+		this.nickname = nickname;
 	}
 
 }

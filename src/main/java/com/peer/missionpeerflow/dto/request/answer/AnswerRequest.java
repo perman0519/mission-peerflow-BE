@@ -21,16 +21,13 @@ public class AnswerRequest {
     private String password;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
-    @NotNull(message = "생성일 입력해주세요.")
-    private LocalDateTime createdAt;
 
     @Builder
-    public AnswerRequest(String nickname, String password,  String content, Long questionId, LocalDateTime createdAt)
+    public AnswerRequest(String nickname, String password,  String content, Long questionId)
     {
         this.nickname = nickname;
         this.password = password;
         this.questionId = questionId;
         this.content = content;
-        this.createdAt = createdAt;
     }
 }

@@ -30,13 +30,17 @@ public class QuestionComment extends BaseEntity {
 	private Question question;
 
 	@Builder
-	public QuestionComment (String content, String nickname, String password, LocalDateTime createdAt, LocalDateTime updatedAt, Question question)
+	public QuestionComment (String content, String nickname, String password, Question question)
 	{
 		this.content = content;
 		this.nickname = nickname;
 		this.password = password;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 		this.question = question;
+	}
+
+	public void updateQuestionComment (String nickname, String content)
+	{
+		this.nickname = nickname;
+		this.content = content;
 	}
 }

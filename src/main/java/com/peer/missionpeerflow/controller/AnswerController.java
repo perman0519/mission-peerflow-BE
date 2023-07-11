@@ -8,9 +8,13 @@ import com.peer.missionpeerflow.exception.UnauthorizedException;
 import com.peer.missionpeerflow.service.AnswerService;
 import com.peer.missionpeerflow.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,32 +25,32 @@ public class AnswerController {
     private final QuestionService questionService;
 
     @PostMapping("")
-    public QuestionDetailResponse create(@Valid @RequestBody AnswerRequest answerRequest)
+    public Map<String, String> create(@Valid @RequestBody AnswerRequest answerRequest)
     {
         answerService.create(answerRequest);
-        return questionService.getQuestionDetailResponse(answerRequest.getQuestionId());
+        return CreateIdJson.createIdJson(Long.toString(answerRequest.getQuestionId()));
     }
 
     @PutMapping("/{id}")
-    public QuestionDetailResponse modify(@PathVariable("id") Long answerId, @RequestBody @Valid AnswerModifyRequest answerModifyRequest)
+    public Map<String, String> modify(@PathVariable("id") Long answerId, @RequestBody @Valid AnswerModifyRequest answerModifyRequest)
     {
         if (answerModifyRequest.getPassword().equals(answerService.getAnswer(answerId).getPassword())) {
             answerService.modify(answerId, answerModifyRequest);
         } else {
             throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
         }
-        return questionService.getQuestionDetailResponse(answerService.getAnswer(answerId).getQuestion().getQuestionId());
+        return CreateIdJson.createIdJson(Long.toString(answerService.getAnswer(answerId).getQuestion().getQuestionId()));
     }
 
     @PostMapping("/{id}")
-    public String delete(@PathVariable("id") Long answerId, @RequestBody @Valid AnswerDeleteRequest answerDeleteRequest)
+    public ResponseEntity delete(@PathVariable("id") Long answerId, @RequestBody @Valid AnswerDeleteRequest answerDeleteRequest)
     {
         if (answerDeleteRequest.getPassword().equals(answerService.getAnswer(answerId).getPassword())) {
             answerService.delete(answerId);
         } else {
             throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
         }
-        return "ok";
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
     @PatchMapping("/{id}")

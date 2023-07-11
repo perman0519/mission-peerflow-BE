@@ -23,17 +23,14 @@ public class QuestionCommentRequest {
     private String password;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
-    @NotNull(message = "생성일 입력해주세요.")
-    private LocalDateTime createdAt;
 
     @Builder
-    public QuestionCommentRequest (LocalDateTime createdAt, Long questionId, String type, String nickname, String password, String content)
+    public QuestionCommentRequest (Long questionId, String type, String nickname, String password, String content)
     {
         this.questionId = questionId;
         this.type = type;
         this.nickname = nickname;
         this.password = password;
         this.content = content;
-        this.createdAt = createdAt;
     }
 }

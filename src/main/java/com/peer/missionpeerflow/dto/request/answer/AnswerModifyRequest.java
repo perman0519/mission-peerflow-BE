@@ -19,15 +19,12 @@ public class AnswerModifyRequest {
     private String password;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
-    @NotNull(message = "업데이트일을 입력해주세요.")
-    private LocalDateTime updatedAt;
 
     @Builder
-    public AnswerModifyRequest(String nickname, String password,  String content, LocalDateTime updatedAt)
+    public AnswerModifyRequest(String nickname, String password,  String content)
     {
         this.nickname = nickname;
         this.password = password;
         this.content = content;
-        this.updatedAt = updatedAt;
     }
 }

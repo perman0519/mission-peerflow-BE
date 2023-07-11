@@ -19,7 +19,7 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
-    public void create(@NotNull QuestionRequest questionRequest) {
+    public Long create(@NotNull QuestionRequest questionRequest) {
         Question entity = Question.builder()
                 .title(questionRequest.getTitle())
                 .content(questionRequest.getContent())
@@ -29,6 +29,7 @@ public class QuestionService {
                 .view(0L)
                 .build();
         this.questionRepository.save(entity);
+        return entity.getQuestionId();
     }
 
     public void modify(@NotNull QuestionModifyRequest questionModifyRequest, Long questionId) {
