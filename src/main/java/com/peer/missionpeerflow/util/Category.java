@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public enum Category {
 	MINISHELL(1, "MINISHELL"),
-	MINIRT(2, "MINIRT"),
+	FDF(2, "FDF"),
 	FT_IRC(3, "FT_IRC");
 
 	private final int code;
