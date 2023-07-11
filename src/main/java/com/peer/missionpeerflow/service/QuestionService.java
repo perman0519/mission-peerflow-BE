@@ -25,7 +25,6 @@ public class QuestionService {
                 .content(questionRequest.getContent())
                 .nickname(questionRequest.getNickname())
                 .password(questionRequest.getPassword())
-                .createdAt(questionRequest.getCreatedAt())
                 .category(questionRequest.getCategory())
                 .view(0L)
                 .build();
@@ -34,7 +33,7 @@ public class QuestionService {
 
     public void modify(@NotNull QuestionModifyRequest questionModifyRequest, Long questionId) {
         Question entity = getQuestion(questionId);
-        entity.update(questionModifyRequest.getTitle(), questionModifyRequest.getNickname(), questionModifyRequest.getCategory(), questionModifyRequest.getContent(), questionModifyRequest.getUpdatedAt());
+        entity.update(questionModifyRequest.getTitle(), questionModifyRequest.getNickname(), questionModifyRequest.getCategory(), questionModifyRequest.getContent());
         questionRepository.save(entity);
     }
 

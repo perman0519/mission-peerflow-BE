@@ -24,17 +24,13 @@ public class QuestionModifyRequest {
     private Category category;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
-    @NotNull(message = "업데이트일을 입력해주세요.")
-    private LocalDateTime updatedAt;
-
     @Builder
-    public QuestionModifyRequest(String title, String nickname, String password, String category, String content, LocalDateTime updatedAt)
+    public QuestionModifyRequest(String title, String nickname, String password, String category, String content)
     {
         this.title = title;
         this.nickname = nickname;
         this.password = password;
         this.category = Category.ofType(category);
         this.content = content;
-        this.updatedAt = updatedAt;
     }
 }
