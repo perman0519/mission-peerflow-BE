@@ -1,6 +1,6 @@
 package com.peer.missionpeerflow.controller;
 
-import com.peer.missionpeerflow.dto.request.question.QuestionDeleteRequest;
+import com.peer.missionpeerflow.dto.request.question.QuestionPasswordRequest;
 import com.peer.missionpeerflow.dto.request.question.QuestionRequest;
 import com.peer.missionpeerflow.dto.response.QuestionDetailResponse;
 import com.peer.missionpeerflow.exception.UnauthorizedException;
@@ -8,6 +8,7 @@ import com.peer.missionpeerflow.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class QuestionController {
 
     private final QuestionService questionService;
-
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
     public QuestionDetailResponse detail (@PathVariable("id") Long questionId) {
@@ -37,7 +38,7 @@ public class QuestionController {
     @PutMapping("/{id}")
     public Map<String, String> modify (@Valid @RequestBody QuestionRequest questionRequest, @PathVariable("id") Long questionId) {
         String questionPassword = questionService.getQuestion(questionId).getPassword();
-        if (questionRequest.getPassword().equals(questionPassword)) {
+        if (passwordEncoder.matches(questionRequest.getPassword(), questionPassword)) {
             questionService.modify(questionRequest, questionId);
         }
         else {
@@ -47,9 +48,9 @@ public class QuestionController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity delete (@RequestBody @Valid QuestionDeleteRequest questionDeleteRequest, @PathVariable("id") Long questionId) {
+    public ResponseEntity delete (@RequestBody @Valid QuestionPasswordRequest questionPasswordRequest, @PathVariable("id") Long questionId) {
         String questionPassword = questionService.getQuestion(questionId).getPassword();
-        if (questionDeleteRequest.getPassword().equals(questionPassword)) {
+        if (passwordEncoder.matches(questionPasswordRequest.getPassword(), questionPassword)) {
             questionService.delete(questionId);
         }
         else {

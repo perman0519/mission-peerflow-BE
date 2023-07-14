@@ -7,6 +7,7 @@ import com.peer.missionpeerflow.exception.NotFoundException;
 import com.peer.missionpeerflow.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
-
+    private final PasswordEncoder passwordEncoder;
     @Transactional
     public Long create(@NotNull QuestionRequest questionRequest) {
         Question entity = Question.builder()
                 .title(questionRequest.getTitle())
                 .content(questionRequest.getContent())
                 .nickname(questionRequest.getNickname())
-                .password(questionRequest.getPassword())
+                .password(passwordEncoder.encode(questionRequest.getPassword()))
                 .category(questionRequest.getCategory())
                 .view(0L)
                 .build();

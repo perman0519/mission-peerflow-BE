@@ -1,6 +1,6 @@
 package com.peer.missionpeerflow.controller;
 
-import com.peer.missionpeerflow.dto.request.comment.QuestionCommentDeleteRequest;
+import com.peer.missionpeerflow.dto.request.comment.QuestionCommentPasswordRequest;
 import com.peer.missionpeerflow.dto.request.comment.QuestionCommentRequest;
 import com.peer.missionpeerflow.dto.response.QuestionCommentResponse;
 import com.peer.missionpeerflow.exception.UnauthorizedException;
@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class QuestionCommentController {
 
     private final QuestionCommentService questionCommentService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("")
     public Map<String, String> create(@Valid @RequestBody QuestionCommentRequest questionCommentRequest)
@@ -37,7 +39,8 @@ public class QuestionCommentController {
     @PutMapping("/{commentId}")
     public Map<String, String>  modify(@Valid @RequestBody QuestionCommentRequest questionCommentRequest, @PathVariable("commentId") Long commentId)
     {
-        if (questionCommentRequest.getPassword().equals(questionCommentService.getComment(commentId).getPassword())) {
+        String password = questionCommentService.getComment(commentId).getPassword();
+        if (passwordEncoder.matches(questionCommentRequest.getPassword(), password)) {
             questionCommentService.modify(commentId, questionCommentRequest);
         }
         else {
@@ -47,9 +50,10 @@ public class QuestionCommentController {
     }
 
     @PostMapping("/{commentId}")
-    public ResponseEntity delete(@Valid @RequestBody QuestionCommentDeleteRequest questionCommentDeleteRequest, @PathVariable("commentId") Long commentId)
+    public ResponseEntity delete(@Valid @RequestBody QuestionCommentPasswordRequest questionCommentPasswordRequest, @PathVariable("commentId") Long commentId)
     {
-        if (questionCommentDeleteRequest.getPassword().equals(questionCommentService.getComment(commentId).getPassword())) {
+        String password = questionCommentService.getComment(commentId).getPassword();
+        if (passwordEncoder.matches(questionCommentPasswordRequest.getPassword(), password))  {
             questionCommentService.delete(commentId);
         }
         else {

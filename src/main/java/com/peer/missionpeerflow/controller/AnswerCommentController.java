@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class AnswerCommentController {
 
     private final AnswerCommentService answerCommentService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("")
     public Map<String, String> create(@Valid @RequestBody AnswerCommentRequest answerCommentRequest)
@@ -36,7 +38,8 @@ public class AnswerCommentController {
     @PutMapping("/{commentId}")
     public Map<String, String> modify (@Valid @RequestBody AnswerCommentRequest answerCommentRequest, @PathVariable("commentId") Long commentId)
     {
-        if (answerCommentRequest.getPassword().equals(answerCommentService.getAnswerComment(commentId).getPassword())) {
+        String password = answerCommentService.getAnswerComment(commentId).getPassword();
+        if (passwordEncoder.matches(answerCommentRequest.getPassword(), password)) {
             answerCommentService.modify(commentId, answerCommentRequest);
         }
         else {
@@ -46,10 +49,11 @@ public class AnswerCommentController {
     }
 
     @PostMapping("/{commentId}")
-    public ResponseEntity delete (@Valid @RequestBody AnswerCommentDeleteRequest answerCommentDeleteRequest, @PathVariable("commentId") Long commentId)
+    public ResponseEntity delete (@Valid @RequestBody AnswerCommentPasswordRequest answerCommentPasswordRequest, @PathVariable("commentId") Long commentId)
     {
-        if (answerCommentDeleteRequest.getPassword().equals(answerCommentService.getAnswerComment(commentId).getPassword())) {
-            answerCommentService.delete(commentId);
+        String password = answerCommentService.getAnswerComment(commentId).getPassword();
+        if (passwordEncoder.matches(answerCommentPasswordRequest.getPassword(), password)) {
+        answerCommentService.delete(commentId);
         }
         else {
             throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
