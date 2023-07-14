@@ -23,14 +23,4 @@ public class QuestionRequest {
     private Category category;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
-
-    @Builder
-    public QuestionRequest(String title, String nickname, String password, String category, String content)
-    {
-        this.title = title;
-        this.nickname = nickname;
-        this.password = password;
-        this.category = Category.ofType(category);
-        this.content = content;
-    }
 }

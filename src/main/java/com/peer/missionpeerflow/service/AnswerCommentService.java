@@ -1,6 +1,5 @@
 package com.peer.missionpeerflow.service;
 
-import com.peer.missionpeerflow.dto.request.comment.AnswerCommentModifyRequest;
 import com.peer.missionpeerflow.dto.request.comment.AnswerCommentRequest;
 import com.peer.missionpeerflow.dto.response.AnswerCommentResponse;
 import com.peer.missionpeerflow.entity.AnswerComment;
@@ -49,10 +48,10 @@ public class AnswerCommentService {
     }
 
     @Transactional
-    public void modify(Long commentId, AnswerCommentModifyRequest answerCommentModifyRequest)
+    public void modify(Long commentId, AnswerCommentRequest answerCommentRequest)
     {
         AnswerComment answerComment = getAnswerComment(commentId);
-        answerComment.updateAnswerComment(answerCommentModifyRequest.getNickname(), answerCommentModifyRequest.getContent());
+        answerComment.updateAnswerComment(answerCommentRequest.getNickname(), answerCommentRequest.getContent());
         answerCommentRepository.save(answerComment);
     }
 

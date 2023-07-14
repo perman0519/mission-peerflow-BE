@@ -1,7 +1,6 @@
 package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.request.answer.AnswerDeleteRequest;
-import com.peer.missionpeerflow.dto.request.answer.AnswerModifyRequest;
 import com.peer.missionpeerflow.dto.request.answer.AnswerRequest;
 import com.peer.missionpeerflow.exception.UnauthorizedException;
 import com.peer.missionpeerflow.service.AnswerService;
@@ -28,10 +27,10 @@ public class AnswerController {
     }
 
     @PutMapping("/{id}")
-    public Map<String, String> modify(@PathVariable("id") Long answerId, @RequestBody @Valid AnswerModifyRequest answerModifyRequest)
+    public Map<String, String> modify(@PathVariable("id") Long answerId, @RequestBody @Valid AnswerRequest answerRequest)
     {
-        if (answerModifyRequest.getPassword().equals(answerService.getAnswer(answerId).getPassword())) {
-            answerService.modify(answerId, answerModifyRequest);
+        if (answerRequest.getPassword().equals(answerService.getAnswer(answerId).getPassword())) {
+            answerService.modify(answerId, answerRequest);
         } else {
             throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
         }

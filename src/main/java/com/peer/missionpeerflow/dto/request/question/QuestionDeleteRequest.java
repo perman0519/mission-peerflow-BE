@@ -13,14 +13,4 @@ public class QuestionDeleteRequest {
 
     @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
-
-
-    @Builder
-    public QuestionDeleteRequest(String password)
-    {
-        this.password = password;
-    }
-
-
-
 }

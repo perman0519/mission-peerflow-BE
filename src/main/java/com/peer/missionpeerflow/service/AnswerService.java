@@ -1,6 +1,5 @@
 package com.peer.missionpeerflow.service;
 
-import com.peer.missionpeerflow.dto.request.answer.AnswerModifyRequest;
 import com.peer.missionpeerflow.dto.request.answer.AnswerRequest;
 import com.peer.missionpeerflow.entity.Answer;
 import com.peer.missionpeerflow.entity.Question;
@@ -31,9 +30,9 @@ public class AnswerService {
     }
 
     @Transactional
-    public void modify(Long answerId, AnswerModifyRequest answerModifyRequest){
+    public void modify(Long answerId, AnswerRequest answerRequest){
         Answer answer = getAnswer(answerId);
-        answer.update(answerModifyRequest.getContent(), answerModifyRequest.getNickname());
+        answer.update(answerRequest.getContent(), answerRequest.getNickname());
         answerRepository.save(answer);
     }
 

@@ -22,14 +22,4 @@ public class QuestionCommentRequest {
     private String password;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
-
-    @Builder
-    public QuestionCommentRequest (Long questionId, String type, String nickname, String password, String content)
-    {
-        this.questionId = questionId;
-        this.type = type;
-        this.nickname = nickname;
-        this.password = password;
-        this.content = content;
-    }
 }

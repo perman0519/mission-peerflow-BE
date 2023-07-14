@@ -67,6 +67,7 @@ public class QuestionDetailResponse {
          Collections.sort(answerResponseList, answerComparator);
         return answerResponseList;
     }
+
     public static QuestionDetailResponse fromQuestion(Question question){
         return QuestionDetailResponse.builder()
                 .type("question")

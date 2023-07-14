@@ -1,7 +1,6 @@
 package com.peer.missionpeerflow.service;
 
 
-import com.peer.missionpeerflow.dto.request.comment.QuestionCommentModifyRequest;
 import com.peer.missionpeerflow.dto.request.comment.QuestionCommentRequest;
 import com.peer.missionpeerflow.dto.response.QuestionCommentResponse;
 import com.peer.missionpeerflow.entity.QuestionComment;
@@ -46,13 +45,13 @@ public class QuestionCommentService {
     }
 
     @Transactional
-    public void modify(Long commentId, QuestionCommentModifyRequest questionCommentModifyRequest)
+    public void modify(Long commentId, QuestionCommentRequest questionCommentRequest)
     {
         QuestionComment questionComment = getComment(commentId);
-        questionComment.updateQuestionComment(questionCommentModifyRequest.getNickname(), questionCommentModifyRequest.getContent());
+        questionComment.updateQuestionComment(questionCommentRequest.getNickname(), questionCommentRequest.getContent());
         questionCommentRepository.save(questionComment);
-
     }
+
     @Transactional
     public void delete(Long commentId)
     {

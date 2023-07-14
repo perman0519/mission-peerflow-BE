@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "answer_comment")
 @Entity
 public class AnswerComment extends BaseEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long answerCommentId;
@@ -41,5 +42,4 @@ public class AnswerComment extends BaseEntity {
 		this.content = content;
 		this.nickname = nickname;
 	}
-
 }

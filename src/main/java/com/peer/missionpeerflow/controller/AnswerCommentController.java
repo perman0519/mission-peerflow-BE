@@ -34,15 +34,15 @@ public class AnswerCommentController {
     }
 
     @PutMapping("/{commentId}")
-    public Map<String, String> modify (@Valid @RequestBody AnswerCommentModifyRequest answerCommentModifyRequest, @PathVariable("commentId") Long commentId)
+    public Map<String, String> modify (@Valid @RequestBody AnswerCommentRequest answerCommentRequest, @PathVariable("commentId") Long commentId)
     {
-        if (answerCommentModifyRequest.getPassword().equals(answerCommentService.getAnswerComment(commentId).getPassword())) {
-            answerCommentService.modify(commentId, answerCommentModifyRequest);
+        if (answerCommentRequest.getPassword().equals(answerCommentService.getAnswerComment(commentId).getPassword())) {
+            answerCommentService.modify(commentId, answerCommentRequest);
         }
         else {
             throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
         }
-        return CreateIdJson.createIdJson(Long.toString(answerCommentModifyRequest.getAnswerId()));
+        return CreateIdJson.createIdJson(Long.toString(answerCommentRequest.getAnswerId()));
     }
 
     @PostMapping("/{commentId}")

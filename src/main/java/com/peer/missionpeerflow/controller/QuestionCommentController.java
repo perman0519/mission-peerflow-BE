@@ -1,7 +1,6 @@
 package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.request.comment.QuestionCommentDeleteRequest;
-import com.peer.missionpeerflow.dto.request.comment.QuestionCommentModifyRequest;
 import com.peer.missionpeerflow.dto.request.comment.QuestionCommentRequest;
 import com.peer.missionpeerflow.dto.response.QuestionCommentResponse;
 import com.peer.missionpeerflow.exception.UnauthorizedException;
@@ -36,15 +35,15 @@ public class QuestionCommentController {
     }
 
     @PutMapping("/{commentId}")
-    public Map<String, String>  modify(@Valid @RequestBody QuestionCommentModifyRequest questionCommentModifyRequest, @PathVariable("commentId") Long commentId)
+    public Map<String, String>  modify(@Valid @RequestBody QuestionCommentRequest questionCommentRequest, @PathVariable("commentId") Long commentId)
     {
-        if (questionCommentModifyRequest.getPassword().equals(questionCommentService.getComment(commentId).getPassword())) {
-            questionCommentService.modify(commentId, questionCommentModifyRequest);
+        if (questionCommentRequest.getPassword().equals(questionCommentService.getComment(commentId).getPassword())) {
+            questionCommentService.modify(commentId, questionCommentRequest);
         }
         else {
             throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
         }
-        return CreateIdJson.createIdJson(Long.toString(questionCommentModifyRequest.getQuestionId()));
+        return CreateIdJson.createIdJson(Long.toString(questionCommentRequest.getQuestionId()));
     }
 
     @PostMapping("/{commentId}")
