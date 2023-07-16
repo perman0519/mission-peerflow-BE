@@ -3,6 +3,7 @@ package com.peer.missionpeerflow.entity;
 import com.peer.missionpeerflow.util.Category;
 import com.peer.missionpeerflow.util.CategoryAttributeConverter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -64,6 +65,7 @@ public class Question extends BaseEntity {
 		this.nickname = nickname;
 		this.category = category;
 		this.content = content;
+		this.updatedAt = LocalDateTime.now();
 	}
 
 	public void updateRecommend(Long recommend) {

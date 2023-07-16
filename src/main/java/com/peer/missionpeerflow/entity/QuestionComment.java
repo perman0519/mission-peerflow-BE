@@ -43,5 +43,6 @@ public class QuestionComment extends BaseEntity {
 	{
 		this.nickname = nickname;
 		this.content = content;
+		this.updatedAt = LocalDateTime.now();
 	}
 }

@@ -36,7 +36,6 @@ public class QuestionService {
     public void modify(@NotNull QuestionRequest questionRequest, Long questionId) {
         Question entity = getQuestion(questionId);
         entity.update(questionRequest.getTitle(), questionRequest.getNickname(), questionRequest.getCategory(), questionRequest.getContent());
-        questionRepository.save(entity);
     }
 
     @Transactional
@@ -54,7 +53,6 @@ public class QuestionService {
     public void updateView(Long questionId) {
         Question entity = getQuestion(questionId);
         entity.updateView(entity.getView() + 1);
-        questionRepository.save(entity);
     }
 
     @Transactional
@@ -66,6 +64,5 @@ public class QuestionService {
     public void updateRecommend(Long questionId) {
         Question entity = getQuestion(questionId);
         entity.updateRecommend(entity.getRecommend() + 1);
-        questionRepository.save(entity);
     }
 }

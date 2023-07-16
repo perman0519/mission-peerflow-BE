@@ -13,6 +13,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 @Table(name = "answer_comment")
@@ -41,5 +43,6 @@ public class AnswerComment extends BaseEntity {
 	{
 		this.content = content;
 		this.nickname = nickname;
+		this.updatedAt = LocalDateTime.now();
 	}
 }

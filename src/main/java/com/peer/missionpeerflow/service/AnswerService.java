@@ -7,6 +7,7 @@ import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.exception.NotFoundException;
 import com.peer.missionpeerflow.repository.AnswerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +17,14 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
     private final QuestionService questionService;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public void create(AnswerRequest answerRequest){
         Answer entity = Answer.builder()
                 .content(answerRequest.getContent())
                 .nickname(answerRequest.getNickname())
-                .password(answerRequest.getPassword())
+                .password(passwordEncoder.encode(answerRequest.getPassword()))
                 .question(questionService.getQuestion(answerRequest.getQuestionId()))
                 .recommend(0L)
                 .build();
@@ -33,7 +35,6 @@ public class AnswerService {
     public void modify(Long answerId, AnswerRequest answerRequest){
         Answer answer = getAnswer(answerId);
         answer.update(answerRequest.getContent(), answerRequest.getNickname());
-        answerRepository.save(answer);
     }
 
     @Transactional
@@ -50,7 +51,6 @@ public class AnswerService {
     public void updateRecommend(Long answerId){
         Answer answer = getAnswer(answerId);
         answer.updateRecommend(answer.getRecommend() + 1);
-        answerRepository.save(answer);
     }
 
     @Transactional
@@ -63,6 +63,5 @@ public class AnswerService {
             }
         }
         answer.updateIsAdopted(true);
-        answerRepository.save(answer);
     }
 }

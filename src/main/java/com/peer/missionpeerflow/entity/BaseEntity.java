@@ -31,6 +31,5 @@ public abstract class BaseEntity {
 	@Column(nullable = false, updatable = false)
 	protected LocalDateTime createdAt;
 
-	@LastModifiedDate
 	protected LocalDateTime updatedAt;
 }

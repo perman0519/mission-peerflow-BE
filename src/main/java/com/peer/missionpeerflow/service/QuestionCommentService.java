@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ public class QuestionCommentService {
 
     private final QuestionService questionService;
     private final QuestionCommentRepository questionCommentRepository;
+    private final PasswordEncoder passwordEncoder;
+
     @Transactional
     public void create(QuestionCommentRequest questionCommentRequest)
     {
@@ -28,7 +31,7 @@ public class QuestionCommentService {
         return QuestionComment.builder()
                 .question(questionService.getQuestion(questionCommentRequest.getQuestionId()))
                 .nickname(questionCommentRequest.getNickname())
-                .password(questionCommentRequest.getPassword())
+                .password(passwordEncoder.encode(questionCommentRequest.getPassword()))
                 .content(questionCommentRequest.getContent())
                 .build();
     }
@@ -49,7 +52,6 @@ public class QuestionCommentService {
     {
         QuestionComment questionComment = getComment(commentId);
         questionComment.updateQuestionComment(questionCommentRequest.getNickname(), questionCommentRequest.getContent());
-        questionCommentRepository.save(questionComment);
     }
 
     @Transactional

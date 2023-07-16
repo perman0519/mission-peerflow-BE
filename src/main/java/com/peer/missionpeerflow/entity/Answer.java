@@ -3,6 +3,7 @@ package com.peer.missionpeerflow.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -60,6 +61,7 @@ public class Answer extends BaseEntity {
 	public void update(String content, String nickname){
 		this.content = content;
 		this.nickname = nickname;
+		this.updatedAt = LocalDateTime.now();
 	}
 
 	public void updateRecommend(Long recommend){
